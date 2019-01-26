@@ -1,6 +1,39 @@
-let canvas = document.getElementById('myCanvas');
-canvas.width = window.innerWidth;
+let game = document.createElement('div');
+game.id = 'game';
+game.width = window.innerWidth;
+game.height = window.innerHeight;
+game.style.display = 'flex';
+document.body.appendChild(game);
+
+let canvas = document.createElement('canvas');
+canvas.id = 'myCanvas';
+game.appendChild(canvas);
+canvas.width = 1000;
 canvas.height = window.innerHeight;
+
+let menuDiv = document.createElement('div');
+menuDiv.id = 'menuDiv';
+game.appendChild(menuDiv);
+menuDiv.width = game.width - 1000;
+menuDiv.height = game.height;
+
+let startMenu = document.createElement('div');
+startMenu.id = 'startMenu';
+menuDiv.appendChild(startMenu);
+startMenu.width = menuDiv.width;
+startMenu.height = menuDiv.height;
+
+let startButton = document.createElement('button');
+startButton.id = 'startButton';
+startButton.innerHTML = 'START';
+startButton.addEventListener('click', animate)
+startMenu.appendChild(startButton);
+
+
+
+// let canvas = document.getElementById('myCanvas');
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
 
 let ctx = canvas.getContext('2d');
 
@@ -173,6 +206,6 @@ function animate(){
 generateGoatStartingCoords();
 goat = new Goat (startingX, startingY, 0, 4, goatWidth, goatWidth);
 console.log('static goats', staticGoatsArr.length);
-animate();
+// animate();
 
 
