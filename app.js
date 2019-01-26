@@ -72,9 +72,10 @@ function Goat (x, y, dx, dy, radius, color) {
 
   this.update = function(){
     // console.log('updating');
+    let hit = branches.filter(x => this.x < (x.x2 + goatWidth/2) && this.x > (x.x1 - goatWidth/2) && this.y > (x.y - 5 - goatWidth - 3))
 
-    if(this.x < (600 + goatWidth/2) && this.x > (100 - goatWidth/2) && this.y > (300 - 5 - goatWidth - 3)){
-      this.y = 300 - goatWidth - 3;
+    if(hit.length > 0){
+      this.y = hit[0].y - goatWidth - 3;
       staticGoatsArr.push(this);
       console.log('our static goats', staticGoatsArr);
       generateGoatStartingCoords();
@@ -89,17 +90,17 @@ function Goat (x, y, dx, dy, radius, color) {
 function moveGoat(e){
   switch(e.keyCode){
     case 39:
-      console.log('move RIGHT, goat!');
+      // console.log('move RIGHT, goat!');
       goat.x += 15;
       // goat.dy = 1;
       break;
     case 37:
-      console.log('move LEFT, goat!!');
+      // console.log('move LEFT, goat!!');
       goat.x -= 15;
       // goat.dy = 1;
       break;
     case 40:
-      console.log('move down, goat!');
+      // console.log('move down, goat!');
       goat.y += 15;
       break;
   }
@@ -124,7 +125,6 @@ function animate(){
   requestAnimationFrame(animate);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   // branches
-  
   for (let i=0; i<branches.length; i++) {
     ctx.beginPath();
     ctx.moveTo(branches[i].x1, branches[i].y);
@@ -133,13 +133,6 @@ function animate(){
     ctx.lineWidth = 5;
     ctx.stroke();
   }  
-
-  // ctx.beginPath();
-  // ctx.moveTo(100,300);
-  // ctx.lineTo(600,300);
-  // ctx.strokeStyle = 'brown';
-  // ctx.lineWidth = 5;
-  // ctx.stroke();
 
   for(var i = 0; i < staticGoatsArr.length; i++){
     staticGoatsArr[i].draw();
