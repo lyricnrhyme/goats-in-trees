@@ -10,6 +10,9 @@ let staticGoatsArr =[];
 
 const colors = ['#4deeea', '#74ee15', '#ffe700', '#f000ff', '#001eff', '#ff0303', '#8400ff', '#00fff6', '#0028ff', '#00ff28', '#ffa300', '#cf0060', '#ff00ff', '#13a8fe', '#4e87a4', '#b0d5ce', '#fff1e4', '#fa86ab', '#ee2889','#7b297d', '#e87888', '#eae8e5', '#b1185a','#c351a2', '#efa9df', '#f3cff1']
 
+let goatsArray = [];
+
+
 // branches
 ctx.beginPath();
 ctx.moveTo(200,300);
@@ -52,7 +55,7 @@ function randomIntFromRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-let goatWidth = 90;
+let goatWidth = 100;
 let startingX;
 let startingY = -100;
 
@@ -61,13 +64,13 @@ function generateGoatStartingCoords(min, max){
   console.log('starting X', startingX);
 }
 
-function Goat (x, y, dx, dy, radius, color) {
+function Goat (x, y, dx, dy, height, width) {
   this.x = x;
   this.y = y;
   this.dx = dx;
   this.dy = dy;
-  this.radius = radius;
-  this.color = color;
+  this.height = height;
+  this.width = width;
 
 
   this.draw = function(){
@@ -76,13 +79,13 @@ function Goat (x, y, dx, dy, radius, color) {
     let img = document.getElementById("goat");
     canvas.appendChild(img);
 
-    let goatX = this.x; 
-    let goatY = this.y;
-    let goatH = 100; 
-    let goatW = 100; 
+    // let goatX = this.x;
+    // let goatY = this.y;
+    // let goatH = 100;
+    // let goatW = 100;
 
-    ctx.drawImage(img, goatX, goatY, goatH, goatW);
-    
+    ctx.drawImage(img, this.x, this.y, this.height, this.width);
+
     // ctx.beginPath();
     // ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     // // ctx.fillStyle = 'black';
@@ -100,12 +103,12 @@ function Goat (x, y, dx, dy, radius, color) {
   this.update = function(){
     // console.log('updating');
 
-    if(this.x < (600 + goatWidth/2) && this.x > (100 - goatWidth/2) && this.y > (300 - 5 - goatWidth - 3)){
+    if(this.x < (600 + goatWidth) && this.x > (100 - goatWidth) && this.y > (300 - 5 - goatWidth - 3)){
       this.y = 300 - goatWidth - 3;
       staticGoatsArr.push(this);
       console.log('our static goats', staticGoatsArr);
       generateGoatStartingCoords();
-      goat = new Goat (startingX, startingY, 0, 4, goatWidth);
+      goat = new Goat (startingX, startingY, 0, 4, 100, 100);
     } else {
       this.y += this.dy;
     }
