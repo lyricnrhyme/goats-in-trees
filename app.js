@@ -37,7 +37,7 @@ function generateGoatStartingCoords(min, max){
 
 let splodeCounter = 0;
 
-let splodeImg = new Image(100,100);
+let splodeImg = new Image(100, 100);
 splodeImg.src = '/assets/goatsplode.png';
 canvas.appendChild(splodeImg);
 
@@ -118,7 +118,7 @@ function Goat (x, y, dx, dy, height, width) {
       generateGoatStartingCoords();
       goat.x = startingX;
       goat.y = startingY;
-      // audio.play();
+    //   audio.play();
     }
 
     this.draw();
