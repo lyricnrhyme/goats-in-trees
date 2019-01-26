@@ -186,7 +186,7 @@ function Goat (x, y, dx, dy, height, width) {
 
   // ***** Adding Sprite ***** // 
 
-let testSprite = new Image(100, 100);
+let testSprite = new Image();
 testSprite.src = "/assets/sprites/boy.png";
 testSprite.addEventListener("load", loadSprite, false);
 
@@ -322,5 +322,3 @@ generateGoatStartingCoords();
 goat = new Goat (startingX, startingY, 0, 4, goatWidth, goatWidth);
 console.log('static goats', staticGoatsArr.length);
 animate();
-
-
