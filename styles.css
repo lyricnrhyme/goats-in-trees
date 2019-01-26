@@ -4,10 +4,13 @@ body {
 }
 
 canvas {
-  background-color: skyblue;
+  /* background-color: skyblue;
   background-image: url("assets/goat-tree.png");
   background-repeat: no-repeat;
   background-position: center;
+  background-size: contain; */
+  background: skyblue url("assets/goat-tree.png") no-repeat center;
+  background-size: contain;
 }
 
 #splode {
