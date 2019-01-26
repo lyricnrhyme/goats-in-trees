@@ -46,7 +46,7 @@ function randomIntFromRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-let goatWidth = 40;
+let goatWidth = 90;
 let startingX;
 let startingY = -100;
 
@@ -62,19 +62,32 @@ function Goat (x, y, dx, dy, radius) {
   this.dy = dy;
   this.radius = radius;
 
+
   this.draw = function(){
     // console.log('drawing');
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    ctx.fillStyle = 'black';
-    ctx.fill();
-    // ctx.strokeStyle = this.stroke
-    // ctx.lineWidth = 2
-    // ctx.stroke()
-    // ctx.shadowBlur = 20
-    // ctx.shadowColor = 'white'
-    // ctx.globalAlpha = 0.9
-    ctx.closePath();
+
+    let img = document.getElementById("goat");
+    canvas.appendChild(img);
+
+    let goatX = this.x; 
+    let goatY = this.y;
+    let goatH = 100; 
+    let goatW = 100; 
+
+    ctx.drawImage(img, goatX, goatY, goatH, goatW);
+    
+    // ctx.beginPath();
+    // ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    // // ctx.fillStyle = 'black';
+    // ctx.fillStyle=imgFill;
+    // ctx.fill();
+    // // ctx.strokeStyle = this.stroke
+    // // ctx.lineWidth = 2
+    // // ctx.stroke()
+    // // ctx.shadowBlur = 20
+    // // ctx.shadowColor = 'white'
+    // // ctx.globalAlpha = 0.9
+    // ctx.closePath();
   }
 
   this.update = function(){
@@ -153,3 +166,13 @@ function animate(){
   goat.update();
 
 }
+// ctx.moveTo(0,0);
+// ctx.lineTo(200, 100);
+// ctx.stroke();
+
+// ctx.beginPath();
+// ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+// ctx.stroke();
+
+
+
