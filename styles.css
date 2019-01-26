@@ -20,3 +20,8 @@ canvas {
   width: 200px;
 }
 
+#bigRedButton {
+  background-color: red;
+  color: white;
+}
+

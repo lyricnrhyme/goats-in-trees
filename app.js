@@ -6,10 +6,16 @@ let ctx = canvas.getContext('2d');
 
 window.addEventListener('keydown', moveGoat, false);
 
+let bigRedButton = document.getElementById('bigRedButton');
+bigRedButton.addEventListener('click', turnGravityOff);
+
+let gravity = true;
+
 let staticGoatsArr =[];
 let goat;
 
 let audio = new Audio('/assets/goatscream.mp3');
+let goatsBleating = new Audio('/assets/goatsbleating.mp3');
 
 let branches = [
   {x1: 200, x2: 400, y: 300},
@@ -24,6 +30,10 @@ let branches = [
 function randomIntFromRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
   console.log('running random INt');
+}
+
+function randomFloatFromRange(min, max) {
+    return Math.random() * (max - min + 1) + min
 }
 
 let goatWidth = 100;
@@ -75,6 +85,9 @@ let goatImg = new Image(100,100);
 goatImg.src = '/assets/goats/goat.png';
 canvas.appendChild(goatImg);
 
+let TO_RADIANS = Math.PI/180;
+let degrees = 10;
+
 function Goat (x, y, dx, dy, height, width) {
   console.log('running Goat');
   this.x = x;
@@ -83,20 +96,48 @@ function Goat (x, y, dx, dy, height, width) {
   this.dy = dy;
   this.height = height;
   this.width = width;
-
+  this.dxgravity = randomFloatFromRange(-1.5,1.5);
+  this.dygravity = -randomFloatFromRange(0.5,1);
 
   this.draw = function(){
     // console.log('drawing');
+    // let goatX = this.x;
+    // let goatY = this.y;
+    // let goatH = 100;
+    // let goatW = 100;
 
     ctx.globalAlpha = 1;
-    ctx.drawImage(goatImg, this.x, this.y, this.height, this.width);
+    if (gravity == false){
+      ctx.save();
+      ctx.translate((this.x + 50), (this.y + 50));
+      ctx.rotate(degrees * TO_RADIANS);
+      ctx.drawImage(goatImg, -50, -50, 100, 100);
+      ctx.restore();
+      degrees+=0.5;
+    } else {
+      ctx.drawImage(goatImg, this.x, this.y, this.height, this.width);
+    }
+
+    // ctx.beginPath();
+    // ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    // // ctx.fillStyle = 'black';
+    // ctx.fillStyle=imgFill;
+    // ctx.fill();
+    // // ctx.strokeStyle = this.stroke
+    // // ctx.lineWidth = 2
+    // // ctx.stroke()
+    // // ctx.shadowBlur = 20
+    // // ctx.shadowColor = 'white'
+    // // ctx.globalAlpha = 0.9
+    // ctx.closePath();
   }
 
   this.update = function(){
     // console.log('updating');
     let hit = branches.filter(x => this.x < (x.x2) && this.x > (x.x1) && this.y > (x.y - goatWidth - 3))
 
-    if(hit.length > 0){
+if(gravity == true){
+if(hit.length > 0){
       this.y = hit[0].y - goatWidth - 3;
         staticGoatsArr.push(this);
         console.log('our static goats', staticGoatsArr.length);
@@ -106,19 +147,23 @@ function Goat (x, y, dx, dy, height, width) {
       this.y += this.dy;
     }
 
-    if(this.y - this.height > canvas.height){
-      splode = new Splode(this.x, -10, 100, 100);
-      splodeCounter = 0;
-      displaySplode = true;
+      if(this.y - this.height > canvas.height){
+        splode = new Splode(this.x, -10, 100, 100);
+        splodeCounter = 0;
+        displaySplode = true;
 
+        // splode.active = true;
+        // splode.draw();
 
-      // splode.active = true;
-      // splode.draw();
+        generateGoatStartingCoords();
+        goat.x = startingX;
+        goat.y = startingY;
+        audio.play();
+      }
+    } else {
+      this.x += this.dxgravity;
+      this.y += this.dygravity;
 
-      generateGoatStartingCoords();
-      goat.x = startingX;
-      goat.y = startingY;
-    //   audio.play();
     }
 
     this.draw();
@@ -145,6 +190,24 @@ function moveGoat(e){
   e.preventDefault();
 }
 
+function turnGravityOff(){
+  if (gravity == true){
+    gravity = false;
+    audio.currentTime = 5;
+    goatsBleating.play();
+
+    setTimeout(function(){
+      goatsBleating.pause();
+    }, 6000);
+  }
+  // else {
+  //   gravity = true;
+  // }
+
+  console.log('gravity ', gravity);
+
+}
+
 function animate(){
   requestAnimationFrame(animate);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -160,7 +223,11 @@ function animate(){
   }
 
   for(var i = 0; i < staticGoatsArr.length; i++){
-    staticGoatsArr[i].draw();
+    if (gravity == true){
+      staticGoatsArr[i].draw();
+    } else {
+      staticGoatsArr[i].update();
+    }
   }
 
   goat.update();
