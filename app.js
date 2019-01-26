@@ -87,10 +87,10 @@ canvas.appendChild(splodeImg);
 
 let splode;
 let displaySplode = false;
-console.log('display splode', displaySplode);
+// console.log('display splode', displaySplode);
 
 function Splode (x){
-  console.log('running Splode');
+  // console.log('running Splode');
   this.x = x;
   this.alpha = 0;
   this.da = 0.1;
@@ -110,7 +110,6 @@ function Splode (x){
   this.update = function(){
     splodeCounter++;
     this.alpha += this.da;
-    console.log('counter', splodeCounter);
     this.draw();
   }
 }
@@ -123,7 +122,7 @@ let TO_RADIANS = Math.PI/180;
 let degrees = 10;
 
 function Goat (x, y, dx, dy, height, width) {
-  console.log('running Goat');
+  // console.log('running Goat');
   this.x = x;
   this.y = y;
   this.dx = dx;
@@ -151,19 +150,6 @@ function Goat (x, y, dx, dy, height, width) {
     } else {
       ctx.drawImage(goatImg, this.x, this.y, this.height, this.width);
     }
-
-    // ctx.beginPath();
-    // ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    // // ctx.fillStyle = 'black';
-    // ctx.fillStyle=imgFill;
-    // ctx.fill();
-    // // ctx.strokeStyle = this.stroke
-    // // ctx.lineWidth = 2
-    // // ctx.stroke()
-    // // ctx.shadowBlur = 20
-    // // ctx.shadowColor = 'white'
-    // // ctx.globalAlpha = 0.9
-    // ctx.closePath();
   }
 
   this.update = function(){
@@ -174,7 +160,7 @@ if(gravity == true){
 if(hit.length > 0){
       this.y = hit[0].y - goatWidth - 3;
         staticGoatsArr.push(this);
-        console.log('our static goats', staticGoatsArr.length);
+        // console.log('our static goats', staticGoatsArr.length);
         generateGoatStartingCoords();
         goat = new Goat (startingX, startingY, 0, 4, 100, 100);
     } else {
@@ -185,9 +171,6 @@ if(hit.length > 0){
         splode = new Splode(this.x, -10, 100, 100);
         splodeCounter = 0;
         displaySplode = true;
-
-        // splode.active = true;
-        // splode.draw();
 
         generateGoatStartingCoords();
         goat.x = startingX;
@@ -234,12 +217,6 @@ function turnGravityOff(){
       goatsBleating.pause();
     }, 6000);
   }
-  // else {
-  //   gravity = true;
-  // }
-
-  console.log('gravity ', gravity);
-
 }
 
 function animate(){
