@@ -7,8 +7,13 @@ let ctx = canvas.getContext('2d');
 window.addEventListener('keydown', moveGoat, false);
 
 let staticGoatsArr =[];
+let goat;
 
-const colors = ['#4deeea', '#74ee15', '#ffe700', '#f000ff', '#001eff', '#ff0303', '#8400ff', '#00fff6', '#0028ff', '#00ff28', '#ffa300', '#cf0060', '#ff00ff', '#13a8fe', '#4e87a4', '#b0d5ce', '#fff1e4', '#fa86ab', '#ee2889','#7b297d', '#e87888', '#eae8e5', '#b1185a','#c351a2', '#efa9df', '#f3cff1']
+let audio = new Audio('/assets/goatscream.mp3');
+
+// const colors = ['#4deeea', '#74ee15', '#ffe700', '#f000ff', '#001eff', '#ff0303', '#8400ff', '#00fff6', '#0028ff', '#00ff28', '#ffa300', '#cf0060', '#ff00ff', '#13a8fe', '#4e87a4', '#b0d5ce', '#fff1e4', '#fa86ab', '#ee2889','#7b297d', '#e87888', '#eae8e5', '#b1185a','#c351a2', '#efa9df', '#f3cff1']
+
+// let goatsArray = [];
 
 // branches
 let branches = [
@@ -23,39 +28,81 @@ let branches = [
 
 function randomIntFromRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
+  console.log('running random INt');
 }
 
-let goatWidth = 90;
+let goatWidth = 100;
 let startingX;
-let startingY = -100;
+let startingY = -50;
 
 function generateGoatStartingCoords(min, max){
   startingX = randomIntFromRange(0 + goatWidth, canvas.width - goatWidth);
   console.log('starting X', startingX);
 }
 
-function Goat (x, y, dx, dy, radius, color) {
+let splodeCounter = 0;
+
+let splodeImg = new Image(100,100);
+splodeImg.src = '/assets/goatsplode.png';
+canvas.appendChild(splodeImg);
+
+let splode;
+let displaySplode = false;
+console.log('display splode', displaySplode);
+
+function Splode (x){
+  console.log('running Splode');
+  this.x = x;
+  this.alpha = 0;
+  this.da = 0.1;
+  this.active = false;
+  this.height = 100;
+  this.width = 100;
+
+  this.draw = function(){
+    if (splodeCounter < 35) {
+      ctx.globalAlpha = this.alpha;
+      ctx.drawImage(splodeImg, this.x, (canvas.height - 55), 100, 100);
+    } else {
+      displaySplode = false;
+    }
+  }
+
+  this.update = function(){
+    splodeCounter++;
+    this.alpha += this.da;
+    console.log('counter', splodeCounter);
+    this.draw();
+  }
+}
+
+let goatImg = new Image(100,100);
+goatImg.src = '/assets/goat.png';
+canvas.appendChild(goatImg);
+
+function Goat (x, y, dx, dy, height, width) {
+  console.log('running Goat');
   this.x = x;
   this.y = y;
   this.dx = dx;
   this.dy = dy;
-  this.radius = radius;
-  this.color = color;
+  this.height = height;
+  this.width = width;
 
 
   this.draw = function(){
     // console.log('drawing');
 
-    let img = document.getElementById("goat");
-    canvas.appendChild(img);
 
-    let goatX = this.x; 
-    let goatY = this.y;
-    let goatH = 100; 
-    let goatW = 100; 
 
-    ctx.drawImage(img, goatX, goatY, goatH, goatW);
-    
+    // let goatX = this.x;
+    // let goatY = this.y;
+    // let goatH = 100;
+    // let goatW = 100;
+
+    ctx.globalAlpha = 1;
+    ctx.drawImage(goatImg, this.x, this.y, this.height, this.width);
+
     // ctx.beginPath();
     // ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     // // ctx.fillStyle = 'black';
@@ -83,6 +130,22 @@ function Goat (x, y, dx, dy, radius, color) {
     } else {
       this.y += this.dy;
     }
+
+    if(this.y - this.height > canvas.height){
+      splode = new Splode(this.x, -10, 100, 100);
+      splodeCounter = 0;
+      displaySplode = true;
+
+
+      // splode.active = true;
+      // splode.draw();
+
+      generateGoatStartingCoords();
+      goat.x = startingX;
+      goat.y = startingY;
+      // audio.play();
+    }
+
     this.draw();
   }
 }
@@ -107,32 +170,19 @@ function moveGoat(e){
   e.preventDefault();
 }
 
-generateGoatStartingCoords();
-
-let goat = new Goat (startingX, startingY, 0, 4, goatWidth);
-console.log(goat);
-goat.draw();
-animate();
-
-// sample cirlce by itself
-// ctx.beginPath();
-// ctx.arc(0, 0, 40, 0, Math.PI * 2, false);
-// ctx.fillStyle = 'black';
-// ctx.fill();
-
 function animate(){
-  // console.log('refreshing');
   requestAnimationFrame(animate);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // branches
+
   for (let i=0; i<branches.length; i++) {
+    ctx.globalAlpha = 1;
     ctx.beginPath();
     ctx.moveTo(branches[i].x1, branches[i].y);
     ctx.lineTo(branches[i].x2, branches[i].y);
     ctx.strokeStyle = 'brown';
     ctx.lineWidth = 5;
     ctx.stroke();
-  }  
+  }
 
   for(var i = 0; i < staticGoatsArr.length; i++){
     staticGoatsArr[i].draw();
@@ -140,14 +190,15 @@ function animate(){
 
   goat.update();
 
+  if (displaySplode == true){
+    splode.update();
+  }
 }
-// ctx.moveTo(0,0);
-// ctx.lineTo(200, 100);
-// ctx.stroke();
 
-// ctx.beginPath();
-// ctx.arc(95, 50, 40, 0, 2 * Math.PI);
-// ctx.stroke();
+generateGoatStartingCoords();
+goat = new Goat (startingX, startingY, 0, 4, goatWidth, goatWidth);
+console.log('static goats', staticGoatsArr.length);
+animate();
 
 
 
