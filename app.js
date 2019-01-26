@@ -104,7 +104,7 @@ function Splode (x){
 }
 
 let goatImg = new Image(100,100);
-goatImg.src = '/assets/goat.png';
+goatImg.src = '/assets/goats/goat.png';
 canvas.appendChild(goatImg);
 
 function Goat (x, y, dx, dy, height, width) {
@@ -225,6 +225,5 @@ generateGoatStartingCoords();
 goat = new Goat (startingX, startingY, 0, 4, goatWidth, goatWidth);
 console.log('static goats', staticGoatsArr.length);
 animate();
-
 
 
