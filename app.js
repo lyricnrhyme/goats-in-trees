@@ -11,6 +11,44 @@ let goat;
 
 let audio = new Audio('/assets/goatscream.mp3');
 
+// // ***** Adding Sprite ***** // 
+
+// let testSprite = new Image(100, 100);
+// testSprite.src = "/assets/sprites/boy.png";
+// testSprite.addEventListener("load", loadSprite, false);
+
+// canvas.appendChild(testSprite);
+
+// function loadSprite(e) {
+//     console.log("loading sprite?")
+//     animate();
+// }
+
+// let shift = 0; 
+// let frameW = 120;
+// let frameH = 200; 
+// let totalFrames = 6;
+// let currentFrame = 0;
+
+// function animate() {
+//     context.clearRect(120, 25, 300, 300);
+    
+//     // draw each frame + place them 
+//     context.drawImage(testSprite, shift, 0, frameW, frameH, 120, 25, frameW, frameH);
+
+//     shift += frameW + 1;
+
+//     // start at the beginning once you reach the end of the sprite
+//     if (currentFrame == totalFrames) {
+//         shift = 0; 
+//         currentFrame = 0;
+//     }
+
+//     currentFrame++;
+
+//     requestAnimationFrame(animate);
+// }
+
 // const colors = ['#4deeea', '#74ee15', '#ffe700', '#f000ff', '#001eff', '#ff0303', '#8400ff', '#00fff6', '#0028ff', '#00ff28', '#ffa300', '#cf0060', '#ff00ff', '#13a8fe', '#4e87a4', '#b0d5ce', '#fff1e4', '#fa86ab', '#ee2889','#7b297d', '#e87888', '#eae8e5', '#b1185a','#c351a2', '#efa9df', '#f3cff1']
 
 // let goatsArray = [];
@@ -103,6 +141,8 @@ function Splode (x){
   }
 }
 
+
+
 let goatImg = new Image(100,100);
 goatImg.src = '/assets/goats/goat.png';
 canvas.appendChild(goatImg);
@@ -143,6 +183,44 @@ function Goat (x, y, dx, dy, height, width) {
     // // ctx.globalAlpha = 0.9
     // ctx.closePath();
   }
+
+  // ***** Adding Sprite ***** // 
+
+let testSprite = new Image(100, 100);
+testSprite.src = "/assets/sprites/boy.png";
+testSprite.addEventListener("load", loadSprite, false);
+
+canvas.appendChild(testSprite);
+
+function loadSprite(e) {
+    console.log("loading sprite?")
+    animate();
+}
+
+let shift = 0; 
+let frameW = 120;
+let frameH = 200; 
+let totalFrames = 6;
+let currentFrame = 0;
+
+// function animateSprite() {
+//     ctx.clearRect(120, 25, 300, 300);
+    
+//     // draw each frame + place them 
+//     ctx.drawImage(testSprite, shift, 0, frameW, frameH, 120, 25, frameW, frameH);
+
+//     shift += frameW + 1;
+
+//     // start at the beginning once you reach the end of the sprite
+//     if (currentFrame == totalFrames) {
+//         shift = 0; 
+//         currentFrame = 0;
+//     }
+
+//     currentFrame++;
+
+//     requestAnimationFrame(animateSprite);
+// }
 
   this.update = function(){
     // console.log('updating');
@@ -199,6 +277,25 @@ function moveGoat(e){
 }
 
 function animate(){
+    function animateSprite() {
+        ctx.clearRect(0, 0, 120, 200);
+        
+        // draw each frame + place them 
+        ctx.drawImage(testSprite, shift, 0, frameW, frameH, 120, 25, frameW, frameH);
+    
+        shift += frameW + 1;
+    
+        // start at the beginning once you reach the end of the sprite
+        if (currentFrame == totalFrames) {
+            shift = 0; 
+            currentFrame = 0;
+        }
+    
+        currentFrame++;
+    
+        requestAnimationFrame(animateSprite);
+    }
+
   requestAnimationFrame(animate);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
