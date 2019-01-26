@@ -94,16 +94,14 @@ function Goat (x, y, dx, dy, height, width) {
 
   this.update = function(){
     // console.log('updating');
-    let hit = branches.filter(x => this.x < (x.x2 + goatWidth) && this.x > (x.x1 - goatWidth) && this.y > (x.y - 5 - goatWidth - 3))
+    let hit = branches.filter(x => this.x < (x.x2) && this.x > (x.x1) && this.y > (x.y - goatWidth - 3))
 
     if(hit.length > 0){
       this.y = hit[0].y - goatWidth - 3;
-      if(staticGoatsArr.length < 5){
         staticGoatsArr.push(this);
         console.log('our static goats', staticGoatsArr.length);
         generateGoatStartingCoords();
         goat = new Goat (startingX, startingY, 0, 4, 100, 100);
-      }
     } else {
       this.y += this.dy;
     }
