@@ -5,40 +5,13 @@ canvas.height = window.innerHeight;
 let ctx = canvas.getContext('2d');
 
 // branches
-ctx.beginPath();
-ctx.moveTo(200,300);
-ctx.lineTo(400,300);
-ctx.strokeStyle = 'brown';
-ctx.lineWidth = 5;
-ctx.stroke();
-
-ctx.beginPath();
-ctx.moveTo(500,400);
-ctx.lineTo(700,400);
-ctx.strokeStyle = 'brown';
-ctx.lineWidth = 5;
-ctx.stroke();
-
-ctx.beginPath();
-ctx.moveTo(100,500);
-ctx.lineTo(300,500);
-ctx.strokeStyle = 'brown';
-ctx.lineWidth = 5;
-ctx.stroke();
-
-ctx.beginPath();
-ctx.moveTo(600,600);
-ctx.lineTo(800,600);
-ctx.strokeStyle = 'brown';
-ctx.lineWidth = 5;
-ctx.stroke();
-
-ctx.beginPath();
-ctx.moveTo(50,700);
-ctx.lineTo(250,700);
-ctx.strokeStyle = 'brown';
-ctx.lineWidth = 5;
-ctx.stroke();
+let branches = [
+  {x1: 200, x2: 400, y: 300},
+  {x1: 500, x2: 700, y: 400},
+  {x1: 100, x2: 300, y: 500},
+  {x1: 600, x2: 800, y: 600},
+  {x1: 50, x2: 250, y: 700}
+]
 
 // pairs of x,y coordinates, function that generates the branches and also defines the areas where the goat stops
 
@@ -107,45 +80,19 @@ function animate(){
   requestAnimationFrame(animate);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   // branches
-
-  ctx.beginPath();
-  ctx.moveTo(100,300);
-  ctx.lineTo(600,300);
-  ctx.strokeStyle = 'brown';
-  ctx.lineWidth = 5;
-  ctx.stroke();
-
-  // ctx.beginPath();
-  // ctx.moveTo(200,300);
-  // ctx.lineTo(400,300);
-  // ctx.strokeStyle = 'brown';
-  // ctx.lineWidth = 5;
-  // ctx.stroke();
+  
+  for (let i=0; i<branches.length; i++) {
+    ctx.beginPath();
+    ctx.moveTo(branches[i].x1, branches[i].y);
+    ctx.lineTo(branches[i].x2, branches[i].y);
+    ctx.strokeStyle = 'brown';
+    ctx.lineWidth = 5;
+    ctx.stroke();
+  }  
 
   // ctx.beginPath();
-  // ctx.moveTo(500,400);
-  // ctx.lineTo(700,400);
-  // ctx.strokeStyle = 'brown';
-  // ctx.lineWidth = 5;
-  // ctx.stroke();
-
-  // ctx.beginPath();
-  // ctx.moveTo(100,500);
-  // ctx.lineTo(300,500);
-  // ctx.strokeStyle = 'brown';
-  // ctx.lineWidth = 5;
-  // ctx.stroke();
-
-  // ctx.beginPath();
-  // ctx.moveTo(600,600);
-  // ctx.lineTo(800,600);
-  // ctx.strokeStyle = 'brown';
-  // ctx.lineWidth = 5;
-  // ctx.stroke();
-
-  // ctx.beginPath();
-  // ctx.moveTo(50,700);
-  // ctx.lineTo(250,700);
+  // ctx.moveTo(100,300);
+  // ctx.lineTo(600,300);
   // ctx.strokeStyle = 'brown';
   // ctx.lineWidth = 5;
   // ctx.stroke();
