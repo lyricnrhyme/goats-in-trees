@@ -18,11 +18,11 @@ let audio = new Audio('/assets/goatscream.mp3');
 let goatsBleating = new Audio('/assets/goatsbleating.mp3');
 
 let branches = [
-  {x1: 200, x2: 400, y: 300},
-  {x1: 500, x2: 700, y: 400},
-  {x1: 100, x2: 300, y: 500},
-  {x1: 600, x2: 800, y: 600},
-  {x1: 50, x2: 250, y: 700},
+  {x1: 650, x2: 775, y: 150},
+  {x1: 790, x2: 925, y: 250},
+  {x1: 475, x2: 600, y: 375},
+  {x1: 675, x2: 800, y: 425},
+  {x1: 750, x2: 890, y: 550},
 ]
 
 // pairs of x,y coordinates, function that generates the branches and also defines the areas where the goat stops
@@ -81,7 +81,7 @@ function Splode (x){
   }
 }
 
-let goatImg = new Image(100,100);
+let goatImg = new Image(100, 100);
 goatImg.src = '/assets/goats/goat.png';
 canvas.appendChild(goatImg);
 
