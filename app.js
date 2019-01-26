@@ -1,6 +1,39 @@
-let canvas = document.getElementById('myCanvas');
-canvas.width = window.innerWidth;
+let game = document.createElement('div');
+game.id = 'game';
+game.width = window.innerWidth;
+game.height = window.innerHeight;
+game.style.display = 'flex';
+document.body.appendChild(game);
+
+let canvas = document.createElement('canvas');
+canvas.id = 'myCanvas';
+game.appendChild(canvas);
+canvas.width = 1000;
 canvas.height = window.innerHeight;
+
+let menuDiv = document.createElement('div');
+menuDiv.id = 'menuDiv';
+game.appendChild(menuDiv);
+menuDiv.width = game.width - 1000;
+menuDiv.height = game.height;
+
+let startMenu = document.createElement('div');
+startMenu.id = 'startMenu';
+menuDiv.appendChild(startMenu);
+startMenu.width = menuDiv.width;
+startMenu.height = menuDiv.height;
+
+let startButton = document.createElement('button');
+startButton.id = 'startButton';
+startButton.innerHTML = 'START';
+startButton.addEventListener('click', animate)
+startMenu.appendChild(startButton);
+
+
+
+// let canvas = document.getElementById('myCanvas');
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
 
 let ctx = canvas.getContext('2d');
 
@@ -18,11 +51,11 @@ let audio = new Audio('/assets/goatscream.mp3');
 let goatsBleating = new Audio('/assets/goatsbleating.mp3');
 
 let branches = [
-  {x1: 200, x2: 400, y: 300},
-  {x1: 500, x2: 700, y: 400},
-  {x1: 100, x2: 300, y: 500},
-  {x1: 600, x2: 800, y: 600},
-  {x1: 50, x2: 250, y: 700},
+  {x1: 650, x2: 775, y: 150},
+  {x1: 790, x2: 925, y: 250},
+  {x1: 475, x2: 600, y: 375},
+  {x1: 675, x2: 800, y: 425},
+  {x1: 750, x2: 890, y: 550},
 ]
 
 // pairs of x,y coordinates, function that generates the branches and also defines the areas where the goat stops
@@ -80,7 +113,7 @@ function Splode (x){
   }
 }
 
-let goatImg = new Image(100,100);
+let goatImg = new Image(100, 100);
 goatImg.src = '/assets/goats/goat.png';
 canvas.appendChild(goatImg);
 
@@ -217,6 +250,6 @@ function animate(){
 generateGoatStartingCoords();
 goat = new Goat (startingX, startingY, 0, 4, goatWidth, goatWidth);
 console.log('static goats', staticGoatsArr.length);
-animate();
+// animate();
 
 
