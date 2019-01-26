@@ -14,4 +14,9 @@ let ctx = canvas.getContext('2d');
 
 let img = document.getElementById("goat");
 canvas.appendChild(img);
-ctx.drawImage(img, 100, 100);
+let goatX = 100; 
+let goatY = 100;
+let goatHeight = 100; 
+let goatWidth = 100; 
+ctx.drawImage(img, goatX, goatY, goatHeight, goatWidth);
+
