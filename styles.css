@@ -103,6 +103,10 @@ canvas {
   /* animation: pulsing-button 1.5s ease-in-out infinite both; */
 }
 
+#bigRedButton:focus, #bigRedButton:active {
+  outline: none;
+}
+
 @keyframes bounce {
   100% {
     top: -10px;

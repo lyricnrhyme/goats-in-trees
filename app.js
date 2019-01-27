@@ -248,6 +248,17 @@ function moveGoat(e){
       goat.y += 15;
       break;
   }
+  // if (key == CODED) {
+  //   if (keyCode == DOWN) {
+  //     goat.x += 15;
+  //   }
+  // }
+  // if (key == CODED) {
+  //   if (keyCode == DOWN) {
+  //     goat.x -= 15;
+  //   }
+  // }
+
   e.preventDefault();
 }
 
