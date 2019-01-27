@@ -130,11 +130,11 @@ function Goat (x, y, dx, dy, height, width) {
 
   this.update = function(){
     // console.log('updating');
-    let hit = branches.filter(x => this.x < (x.x2) && this.x > (x.x1) && this.y > (x.y - goatWidth - 3))
+    let hit = branches.filter(goat => this.x < (goat.x2) && this.x > (goat.x1) && this.y >  (goat.y-goatWidth) && this.y < (goat.y+16))
 
 if(gravity == true){
 if(hit.length > 0){
-      this.y = hit[0].y - goatWidth - 3;
+      this.y = hit[0].y - goatWidth;
         staticGoatsArr.push(this);
         // console.log('our static goats', staticGoatsArr.length);
         generateGoatStartingCoords();
@@ -227,6 +227,6 @@ function animate(){
 generateGoatStartingCoords();
 goat = new Goat (startingX, startingY, 0, 4, goatWidth, goatWidth);
 console.log('static goats', staticGoatsArr.length);
-animate();
+// animate();
 
 
