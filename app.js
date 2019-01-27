@@ -162,7 +162,12 @@ if(hit.length > 0){
         staticGoatsArr.push(this);
         // console.log('our static goats', staticGoatsArr.length);
         generateGoatStartingCoords();
-        goat = new Goat (startingX, startingY, 0, 4, 100, 100);
+        if (staticGoatsArr.length % 5 === 0) {
+          this.doubledy = 2 * this.dy;
+          goat = new Goat (startingX, startingY, 0, this.doubledy, 100, 100)
+        } else {
+          goat = new Goat (startingX, startingY, 0, this.dy, 100, 100);
+        }
     } else {
       this.y += this.dy;
     }
@@ -251,6 +256,6 @@ function animate(){
 generateGoatStartingCoords();
 goat = new Goat (startingX, startingY, 0, 4, goatWidth, goatWidth);
 console.log('static goats', staticGoatsArr.length);
-// animate();
+animate();
 
 
