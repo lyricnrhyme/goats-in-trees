@@ -3,6 +3,8 @@ let startButton = document.getElementById('startButton');
 startButton.addEventListener('click', startGame)
 
 function startGame() {
+  gameOver = false;
+  newGame = true;
   animate();
   document.getElementById('startDiv').style.display = 'none';
 }
@@ -54,6 +56,9 @@ live2.src = aliveGoat;
 live3.src = aliveGoat;
 
 let liveArr = [live1, live2, live3];
+
+let newGame = false;
+let gameOver = false;
 
 function randomIntFromRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
@@ -150,7 +155,6 @@ function Goat (x, y, dx, dy, height, width) {
   this.update = function(){
     // console.log('updating');
     let hit = branches.filter(goat => this.x < (goat.x2) && this.x > (goat.x1) && this.y >  (goat.y-goatWidth) && this.y < (goat.y+16))
-
     if(gravity == true){
       if(hit.length > 0){
         this.y = hit[0].y - goatWidth;
@@ -171,12 +175,30 @@ function Goat (x, y, dx, dy, height, width) {
         displaySplode = true;
 
         generateGoatStartingCoords();
+        if (newGame === true) {
+          goat = new Goat (startingX, startingY, 0, 4, 100, 100);
+          newGame = false;
+        } else if (staticGoatsArr.length % 5 === 0) {
+          this.newDeltaY = 1.25 * this.dy;
+          goat = new Goat (startingX, startingY, 0, this.newDeltaY, 100, 100)
+        } else {
+          goat = new Goat (startingX, startingY, 0, this.dy, 100, 100);
+        }
         goat.x = startingX;
         goat.y = startingY;
         audio.play();
         if (liveCounter < 3){
           liveCounter ++;
           liveArr[liveCounter-1].src = deadGoat;
+          if (liveCounter === 3) {
+            gameOver = true;
+            staticGoatsArr = [];
+            liveCounter = 0;
+            live1.src = aliveGoat;
+            live2.src = aliveGoat;
+            live3.src = aliveGoat;
+            document.getElementById('startDiv').style.display = 'flex';
+          }
         }
       }
     } else {
@@ -245,7 +267,10 @@ function animate(){
     }
   }
 
-  goat.update();
+  if(!gameOver) {
+    newGame = true;
+    goat.update();
+  }
 
   if (displaySplode == true){
     splode.update();
