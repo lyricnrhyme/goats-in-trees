@@ -42,7 +42,7 @@ let branches = [
   {x1: 790, x2: 925, y: 250},
   {x1: 475, x2: 600, y: 375},
   {x1: 675, x2: 800, y: 425},
-  {x1: 750, x2: 890, y: 550},
+  {x1: 750, x2: 890, y: 525},
 ]
 
 // pairs of x,y coordinates, function that generates the branches and also defines the areas where the goat stops
@@ -124,7 +124,7 @@ function Splode (x){
 }
 
 let goatImg = new Image(100, 100);
-goatImg.src = '/assets/goats/goat.png';
+goatImg.src = '/assets/goats/cute-goat-2.png';
 canvas.appendChild(goatImg);
 
 
