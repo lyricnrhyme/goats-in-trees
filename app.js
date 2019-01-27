@@ -102,8 +102,8 @@ function Goat (x, y, dx, dy, height, width) {
         console.log('our static goats', staticGoatsArr.length);
         generateGoatStartingCoords();
         if (staticGoatsArr.length % 5 === 0) {
-          this.doubledy = 2 * this.dy;
-          goat = new Goat (startingX, startingY, 0, this.doubledy, 100, 100)
+          this.newDeltaY = 1.25 * this.dy;
+          goat = new Goat (startingX, startingY, 0, this.newDeltaY, 100, 100)
         } else {
           goat = new Goat (startingX, startingY, 0, this.dy, 100, 100);
         }
@@ -178,6 +178,6 @@ function animate(){
 generateGoatStartingCoords();
 goat = new Goat (startingX, startingY, 0, 4, goatWidth, goatWidth);
 console.log('static goats', staticGoatsArr.length);
-animate();
+// animate();
 
 
