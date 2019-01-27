@@ -158,9 +158,6 @@ function Goat (x, y, dx, dy, height, width) {
   }
 
   this.update = function(){
-    console.time("Start of Update");
-    console.log('this.dy:', this.dy);
-
     let newdy = this.dy;
 
     let hit = branches.filter(goat => this.x < (goat.x2) && this.x > (goat.x1) && this.y >  (goat.y-goatWidth) && this.y < (goat.y+16))
@@ -210,6 +207,7 @@ function Goat (x, y, dx, dy, height, width) {
             live1.src = aliveGoat;
             live2.src = aliveGoat;
             live3.src = aliveGoat;
+            stopAnimation();
             document.getElementById('startDiv').style.display = 'flex';
           }
         }
@@ -257,9 +255,16 @@ function turnGravityOff(){
   }
 }
 
+var requestId = "";
+
+function stopAnimation(e) {
+  cancelAnimationFrame(requestId);
+}
+
 function animate(){
-  cancelAnimationFrame(animate);
-  requestAnimationFrame(animate);
+  // requestAnimationFrame(animate);
+  requestId = requestAnimationFrame(animate);
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   for (let i=0; i<branches.length; i++) {
