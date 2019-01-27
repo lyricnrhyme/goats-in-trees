@@ -25,15 +25,6 @@ canvas {
   transition: top 2s, left 2s, font-size 2s;
 }
 
-/* ***** GOATS IN A TREE HEADER FOR START SCREEN ***** */
-.startHeader {
-  position: absolute;
-  top: 2%;
-  left: 30.5%;
-  font-size: 20px;
-  transition: top 2s, left 2s, font-size 2s;
-}
-
 /* ***** GOATS IN A TREE HEADER TEXT ANIMATION ***** */
 h1 span:nth-child(2) {animation-delay: .2s}
 h1 span:nth-child(3) {animation-delay: .3s}
@@ -233,18 +224,27 @@ h1 span {
   z-index: 4;
 }
 
+/* ***** GOATS IN A TREE HEADER FOR START SCREEN ***** */
+.startHeader {
+  position: absolute;
+  top: 5%;
+  left: 34%;
+  font-size: 20px;
+  transition: top 2s, left 2s, font-size 2s;
+}
+
 /* ***** START SCREEN ***** */
 .startTextContainer {
-  margin: auto;
+  /* margin: auto; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 700px;
-  height: 600px;
+  height: 250px;
   position: absolute;
-  top: 15%;
+  top: 20%;
   left: 30.5%;
-  line-height: 50px;
+  line-height: 40px;
   box-sizing: border-box;
 }
 
@@ -253,6 +253,7 @@ h1 span {
   font-family: 'Hind', sans-serif;
   font-size: 22px;
   height: 15px;
+  margin: 0;
 }
 
 .arrowkeys {
@@ -297,6 +298,10 @@ h1 span {
   font-family: "Notable", sans-serif;
 }
 
+.chooseAGoatContainer {
+  margin-top: 3%
+}
+
 /* ***** START SCREEN GOAT SELECTION ***** */
 #goats {
   display: flex;
@@ -314,7 +319,7 @@ h1 span {
   justify-content: space-around;
   position: absolute;
   bottom: 20%;
-  left: 15%;
+  left: 38%;
 }
 
 #leftSelect, #rightSelect {
@@ -334,8 +339,11 @@ h1 span {
 /* ***** START SCREEN START BUTTON ***** */
 #startButton {
   z-index: 2;
+  position: absolute; 
+  bottom: 8%;
+  left: 30.5%;
   height: 65px;
-  width: 80%;
+  width: 40%;
   margin-top: 60px;
   border-radius: 5px;
   font-size: 32px;
