@@ -94,11 +94,11 @@ canvas.appendChild(goatImg);
 
 function selectThisGoat() {
   for (let i=0; i<goatSelects.length; i++) {
-    if (goatSelects[i].style.border === '1px solid skyblue') {
+    if (goatSelects[i].style.border === '3px solid rgb(72, 188, 224)') {
       goatSelects[i].style.border = 'none';
     }
   }
-  this.style.border = '1px solid skyblue'
+  this.style.border = '3px solid rgb(72, 188, 224)'
   let chosenGoat = this.style.backgroundImage.split('');
   chosenGoat.pop();
   chosenGoat.pop();
@@ -167,10 +167,8 @@ canvas.appendChild(splodeImg);
 
 let splode;
 let displaySplode = false;
-// console.log('display splode', displaySplode);
 
 function Splode (x){
-  // console.log('running Splode');
   this.x = x;
   this.alpha = 0;
   this.da = 0.1;
@@ -204,7 +202,6 @@ let TO_RADIANS = Math.PI/180;
 let degrees = 10;
 
 function Goat (x, y, dx, dy, height, width) {
-  // console.log('running Goat');
   this.x = x;
   this.y = y;
   this.dx = dx;
@@ -350,12 +347,6 @@ function animate(){
 
   for (let i=0; i<branches.length; i++) {
     ctx.globalAlpha = 1;
-    // ctx.beginPath();
-    // ctx.moveTo(branches[i].x1, branches[i].y);
-    // ctx.lineTo(branches[i].x2, branches[i].y);
-    // ctx.strokeStyle = 'brown';
-    // ctx.lineWidth = 5;
-    // ctx.stroke();
 
     ctx.drawImage(branchImg, branches[i].x1, branches[i].y - 40, 150, 50)
   }
