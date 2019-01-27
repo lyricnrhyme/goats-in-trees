@@ -10,7 +10,7 @@ body {
 
 .header {
   font-family: "Baloo Thambi", cursive;
-  font-size: 12px;
+  font-size: 14px;
   color: darkblue;
   position: absolute; 
   top: 20px;
@@ -20,8 +20,8 @@ body {
 
 #bigRedButton {
   font-family: "Baloo Thambi", cursive;
-  width: 75px;
-  height: 75px;
+  width: 70px;
+  height: 70px;
   border-radius: 50px;
   box-shadow: 5px 2px 5px grey;
   border: none;
