@@ -4,6 +4,8 @@ let startButton = document.getElementById('startButton');
 startButton.addEventListener('click', startGame)
 
 function startGame() {
+  gameOver = false;
+  newGame = true;
   animate();
   document.getElementById('startDiv').style.display = 'none';
 }
@@ -56,6 +58,7 @@ live3.src = aliveGoat;
 
 let liveArr = [live1, live2, live3];
 
+let newGame = false;
 let gameOver = false;
 
 function randomIntFromRange(min, max) {
@@ -173,7 +176,10 @@ function Goat (x, y, dx, dy, height, width) {
         displaySplode = true;
 
         generateGoatStartingCoords();
-        if (staticGoatsArr.length % 5 === 0) {
+        if (newGame === true) {
+          goat = new Goat (startingX, startingY, 0, 4, 100, 100);
+          newGame = false;
+        } else if (staticGoatsArr.length % 5 === 0) {
           this.newDeltaY = 1.25 * this.dy;
           goat = new Goat (startingX, startingY, 0, this.newDeltaY, 100, 100)
         } else {
@@ -187,6 +193,7 @@ function Goat (x, y, dx, dy, height, width) {
           liveArr[liveCounter-1].src = deadGoat;
           if (liveCounter === 3) {
             gameOver = true;
+            staticGoatsArr = [];
             document.getElementById('startDiv').style.display = 'flex';
           }
         }
@@ -256,6 +263,7 @@ function animate(){
   }
 
   if(!gameOver) {
+    newGame = true;
     goat.update();
   }
 
