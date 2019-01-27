@@ -100,6 +100,7 @@ canvas {
   color: white;
   animation: button-top-slide-in 2s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
   animation-delay: 5s;
+  /* animation: pulsing-button 1.5s ease-in-out infinite both; */
 }
 
 @keyframes bounce {
@@ -283,5 +284,29 @@ canvas {
     transform-origin: 50% 50%;
     filter: blur(0);
     opacity: 1;
+  }
+}
+
+@keyframes pulsing-button {
+  from {
+    transform: scale(1);
+    transform-origin: center center;
+    animation-timing-function: ease-out;
+  }
+  10% {
+    transform: scale(0.91);
+    animation-timing-function: ease-in;
+  }
+  17% {
+    transform: scale(0.98);
+    animation-timing-function: ease-out;
+  }
+  33% {
+    transform: scale(0.87);
+    animation-timing-function: ease-in;
+  }
+  45% {
+    transform: scale(1);
+    animation-timing-function: ease-out;
   }
 }
