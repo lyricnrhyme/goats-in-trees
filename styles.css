@@ -270,6 +270,7 @@ canvas {
   margin: auto;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   width: 700px;
   height: 300px;
   position: absolute;
@@ -341,9 +342,15 @@ canvas {
   display: flex;
 }
 
+#goatSelectContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
 #goatSelection {
   display: flex;
   align-items: center;
+
 }
 
 #leftSelect, #rightSelect {
