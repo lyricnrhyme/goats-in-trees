@@ -1,7 +1,52 @@
 body {
   margin: 0;
   padding: 0;
+  /* display: flex;
+  flex-direction: row; 
+  justify-content: space-around; */
+  background: url("assets/background.jpg") no-repeat center; 
+  background-size: 100% 100%;
 }
+
+.header {
+  font-size: 12px;
+  color: white;
+  position: absolute; 
+  top: 20px;
+  left: 20px;
+  width: 100%;
+}
+
+#bigRedButton {
+  width: 75px;
+  height: 75px;
+  border-radius: 50px;
+  box-shadow: 5px 2px 5px grey;
+  border: none;
+  position: absolute; 
+  top: 15%;
+  left: 2%;
+}
+
+h1 span {
+  position: relative;
+  top: 20px;
+  animation: bounce .3s ease infinite alternate;
+}
+
+h1 span:nth-child(2) {animation-delay: .2s}
+h1 span:nth-child(3) {animation-delay: .3s}
+h1 span:nth-child(4) {animation-delay: .4s}
+h1 span:nth-child(5) {animation-delay: .5s}
+h1 span:nth-child(6) {animation-delay: .6s}
+h1 span:nth-child(7) {animation-delay: .7s}
+h1 span:nth-child(8) {animation-delay: .8s}
+h1 span:nth-child(9) {animation-delay: .9s}
+h1 span:nth-child(10) {animation-delay: 1s}
+h1 span:nth-child(11) {animation-delay: 1.2s}
+h1 span:nth-child(12) {animation-delay: 1.4s}
+h1 span:nth-child(13) {animation-delay: 1.6s}
+
 
 canvas {
   /* background-color: skyblue;
@@ -11,9 +56,10 @@ canvas {
   background-size: contain; */
   width: 100%;
   height: 100vh;
-  background: skyblue url("assets/goat-tree.png") no-repeat center;
+  background: url("assets/goat-tree.png") no-repeat center;
   background-size: contain;
 }
+
 
 #splode {
   height: 200px;
@@ -38,4 +84,11 @@ canvas {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+@keyframes bounce {
+  100% {
+    top: -10px;
+    text-shadow: - 5px 0 grey;
+  }
 }

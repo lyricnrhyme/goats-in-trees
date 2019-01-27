@@ -227,6 +227,6 @@ function animate(){
 generateGoatStartingCoords();
 goat = new Goat (startingX, startingY, 0, 4, goatWidth, goatWidth);
 console.log('static goats', staticGoatsArr.length);
-// animate();
+animate();
 
 
