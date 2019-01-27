@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: skyblue;
 }
 
 canvas {
@@ -15,6 +16,11 @@ canvas {
   background-size: contain;
 }
 
+#startButton {
+  z-index: 2;
+  float: left;
+}
+
 #splode {
   height: 200px;
   width: 200px;
@@ -25,3 +31,61 @@ canvas {
   color: white;
 }
 
+.infoContainer {
+  /*background-color: yellow;*/
+  width: 310px;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  padding-right: 30px;
+  padding-top: 30px;
+  justify-content: flex-end;
+  z-index: 1;
+  margin-top:50px;
+}
+
+.livesContainer {
+  /*background-color: yellow;*/
+  width: 180px;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.scoreContainer {
+  /*background-color: blue;*/
+  width: 100px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*@font-face {
+  font-family: Blocky;
+  src: url(BLOCKHEAD.ttf) format(truetype);
+}*/
+
+.score {
+  /*font-family: Blocky;*/
+  font-family: 'Notable', sans-serif;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+}
+
+.points {
+  font-size: 24px;
+}
+
+.lives {
+  width: 60px;
+  height: 60px;
+}
