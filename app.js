@@ -1,3 +1,13 @@
+
+
+let startButton = document.getElementById('startButton');
+startButton.addEventListener('click', startGame)
+
+function startGame() {
+  animate();
+  document.getElementById('startDiv').style.display = 'none';
+}
+
 let canvas = document.getElementById('myCanvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -6,24 +16,55 @@ let ctx = canvas.getContext('2d');
 
 window.addEventListener('keydown', moveGoat, false);
 
+let bigRedButton = document.getElementById('bigRedButton');
+bigRedButton.addEventListener('click', turnGravityOff);
+
+let gravity = true;
+
 let staticGoatsArr =[];
 let goat;
 
 let audio = new Audio('/assets/goatscream.mp3');
+let goatsBleating = new Audio('/assets/goatsbleating.mp3');
 
 let branches = [
-  {x1: 200, x2: 400, y: 300},
-  {x1: 500, x2: 700, y: 400},
-  {x1: 100, x2: 300, y: 500},
-  {x1: 600, x2: 800, y: 600},
-  {x1: 50, x2: 250, y: 700},
+  {x1: 650, x2: 775, y: 150},
+  {x1: 790, x2: 925, y: 250},
+  {x1: 475, x2: 600, y: 375},
+  {x1: 675, x2: 800, y: 425},
+  {x1: 750, x2: 890, y: 550},
 ]
 
 // pairs of x,y coordinates, function that generates the branches and also defines the areas where the goat stops
 
+let points = 0;
+let pointsPerGoat = 20;
+let pointDiv = document.getElementById('points');
+
+let liveCounter = 0;
+
+let aliveGoat = '/assets/goat-green.png';
+let deadGoat = '/assets/goat-red.png';
+
+let live1 = document.getElementById('live1');
+let live2 = document.getElementById('live2');
+let live3 = document.getElementById('live3');
+
+live1.src = aliveGoat;
+live2.src = aliveGoat;
+live3.src = aliveGoat;
+
+let liveArr = [live1, live2, live3];
+
+let gameOver = false;
+
 function randomIntFromRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
-  console.log('running random INt');
+  console.log('running random Int');
+}
+
+function randomFloatFromRange(min, max) {
+    return Math.random() * (max - min + 1) + min
 }
 
 let goatWidth = 100;
@@ -37,16 +78,16 @@ function generateGoatStartingCoords(min, max){
 
 let splodeCounter = 0;
 
-let splodeImg = new Image(100,100);
+let splodeImg = new Image(100, 100);
 splodeImg.src = '/assets/goatsplode.png';
 canvas.appendChild(splodeImg);
 
 let splode;
 let displaySplode = false;
-console.log('display splode', displaySplode);
+// console.log('display splode', displaySplode);
 
 function Splode (x){
-  console.log('running Splode');
+  // console.log('running Splode');
   this.x = x;
   this.alpha = 0;
   this.da = 0.1;
@@ -66,40 +107,71 @@ function Splode (x){
   this.update = function(){
     splodeCounter++;
     this.alpha += this.da;
-    console.log('counter', splodeCounter);
     this.draw();
   }
 }
 
-let goatImg = new Image(100,100);
+let goatImg = new Image(100, 100);
 goatImg.src = '/assets/goats/goat.png';
 canvas.appendChild(goatImg);
 
+let TO_RADIANS = Math.PI/180;
+let degrees = 10;
+
 function Goat (x, y, dx, dy, height, width) {
-  console.log('running Goat');
+  // console.log('running Goat');
   this.x = x;
   this.y = y;
   this.dx = dx;
   this.dy = dy;
   this.height = height;
   this.width = width;
-
+  this.dxgravity = randomFloatFromRange(-1.5,1.5);
+  this.dygravity = -randomFloatFromRange(0.5,1);
 
   this.draw = function(){
     // console.log('drawing');
+    // let goatX = this.x;
+    // let goatY = this.y;
+    // let goatH = 100;
+    // let goatW = 100;
 
     ctx.globalAlpha = 1;
-    ctx.drawImage(goatImg, this.x, this.y, this.height, this.width);
+    if (gravity == false){
+      ctx.save();
+      ctx.translate((this.x + 50), (this.y + 50));
+      ctx.rotate(degrees * TO_RADIANS);
+      ctx.drawImage(goatImg, -50, -50, 100, 100);
+      ctx.restore();
+      degrees+=0.5;
+    } else {
+      ctx.drawImage(goatImg, this.x, this.y, this.height, this.width);
+    }
   }
 
   this.update = function(){
     // console.log('updating');
-    let hit = branches.filter(x => this.x < (x.x2) && this.x > (x.x1) && this.y > (x.y - goatWidth - 3))
+    let hit = branches.filter(goat => this.x < (goat.x2) && this.x > (goat.x1) && this.y >  (goat.y-goatWidth) && this.y < (goat.y+16))
 
-    if(hit.length > 0){
-      this.y = hit[0].y - goatWidth - 3;
-        staticGoatsArr.push(this);
-        console.log('our static goats', staticGoatsArr.length);
+    if(gravity == true){
+      if(hit.length > 0){
+        this.y = hit[0].y - goatWidth;
+          staticGoatsArr.push(this);
+          // console.log('our static goats', staticGoatsArr.length);
+          generateGoatStartingCoords();
+          goat = new Goat (startingX, startingY, 0, 4, 100, 100);
+          points += pointsPerGoat;
+          pointDiv.innerHTML = points;
+
+      } else {
+        this.y += this.dy;
+      }
+
+      if(this.y - this.height > canvas.height){
+        splode = new Splode(this.x, -10, 100, 100);
+        splodeCounter = 0;
+        displaySplode = true;
+
         generateGoatStartingCoords();
         if (staticGoatsArr.length % 5 === 0) {
           this.newDeltaY = 1.25 * this.dy;
@@ -107,23 +179,21 @@ function Goat (x, y, dx, dy, height, width) {
         } else {
           goat = new Goat (startingX, startingY, 0, this.dy, 100, 100);
         }
+        goat.x = startingX;
+        goat.y = startingY;
+        audio.play();
+        if (liveCounter < 3){
+          liveCounter ++;
+          liveArr[liveCounter-1].src = deadGoat;
+          if (liveCounter === 3) {
+            gameOver = true
+          }
+        }
+      }
     } else {
-      this.y += this.dy;
-    }
+      this.x += this.dxgravity;
+      this.y += this.dygravity;
 
-    if(this.y - this.height > canvas.height){
-      splode = new Splode(this.x, -10, 100, 100);
-      splodeCounter = 0;
-      displaySplode = true;
-
-
-      // splode.active = true;
-      // splode.draw();
-
-      generateGoatStartingCoords();
-      goat.x = startingX;
-      goat.y = startingY;
-      // audio.play();
     }
 
     this.draw();
@@ -150,6 +220,18 @@ function moveGoat(e){
   e.preventDefault();
 }
 
+function turnGravityOff(){
+  if (gravity == true){
+    gravity = false;
+    audio.currentTime = 5;
+    goatsBleating.play();
+
+    setTimeout(function(){
+      goatsBleating.pause();
+    }, 6000);
+  }
+}
+
 function animate(){
   requestAnimationFrame(animate);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -165,10 +247,16 @@ function animate(){
   }
 
   for(var i = 0; i < staticGoatsArr.length; i++){
-    staticGoatsArr[i].draw();
+    if (gravity == true){
+      staticGoatsArr[i].draw();
+    } else {
+      staticGoatsArr[i].update();
+    }
   }
-  
-  goat.update();
+
+  if(!gameOver) {
+    goat.update();
+  }
 
   if (displaySplode == true){
     splode.update();
