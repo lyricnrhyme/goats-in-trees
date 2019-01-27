@@ -37,9 +37,28 @@ let branches = [
 
 // pairs of x,y coordinates, function that generates the branches and also defines the areas where the goat stops
 
+let points = 0;
+let pointsPerGoat = 20;
+let pointDiv = document.getElementById('points');
+
+let liveCounter = 0;
+
+let aliveGoat = '/assets/goat-green.png';
+let deadGoat = '/assets/goat-red.png';
+
+let live1 = document.getElementById('live1');
+let live2 = document.getElementById('live2');
+let live3 = document.getElementById('live3');
+
+live1.src = aliveGoat;
+live2.src = aliveGoat;
+live3.src = aliveGoat;
+
+let liveArr = [live1, live2, live3];
+
 function randomIntFromRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
-  console.log('running random INt');
+  console.log('running random Int');
 }
 
 function randomFloatFromRange(min, max) {
@@ -132,16 +151,19 @@ function Goat (x, y, dx, dy, height, width) {
     // console.log('updating');
     let hit = branches.filter(goat => this.x < (goat.x2) && this.x > (goat.x1) && this.y >  (goat.y-goatWidth) && this.y < (goat.y+16))
 
-if(gravity == true){
-if(hit.length > 0){
-      this.y = hit[0].y - goatWidth;
-        staticGoatsArr.push(this);
-        // console.log('our static goats', staticGoatsArr.length);
-        generateGoatStartingCoords();
-        goat = new Goat (startingX, startingY, 0, 4, 100, 100);
-    } else {
-      this.y += this.dy;
-    }
+    if(gravity == true){
+      if(hit.length > 0){
+        this.y = hit[0].y - goatWidth;
+          staticGoatsArr.push(this);
+          // console.log('our static goats', staticGoatsArr.length);
+          generateGoatStartingCoords();
+          goat = new Goat (startingX, startingY, 0, 4, 100, 100);
+          points += pointsPerGoat;
+          pointDiv.innerHTML = points;
+
+      } else {
+        this.y += this.dy;
+      }
 
       if(this.y - this.height > canvas.height){
         splode = new Splode(this.x, -10, 100, 100);
@@ -152,6 +174,10 @@ if(hit.length > 0){
         goat.x = startingX;
         goat.y = startingY;
         audio.play();
+        if (liveCounter < 3){
+          liveCounter ++;
+          liveArr[liveCounter-1].src = deadGoat;
+        }
       }
     } else {
       this.x += this.dxgravity;
