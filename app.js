@@ -1,35 +1,3 @@
-// let game = document.createElement('div');
-// game.id = 'game';
-// game.style.width = window.innerWidth;
-// game.style.height = window.innerHeight;
-// game.style.display = 'flex';
-// document.body.appendChild(game);
-
-// let canvas = document.createElement('canvas');
-// canvas.id = 'myCanvas';
-// game.appendChild(canvas);
-// canvas.style.width = 1000;
-// canvas.style.height = window.innerHeight;
-
-// let menuDiv = document.createElement('div');
-// menuDiv.id = 'menuDiv';
-// game.appendChild(menuDiv);
-// menuDiv.style.display = 'none';
-// menuDiv.style.width = game.style.width - 1000;
-// menuDiv.style.height = game.style.height;
-
-// let startMenu = document.createElement('div');
-// startMenu.id = 'startMenu';
-// menuDiv.appendChild(startMenu);
-// startMenu.style.width = menuDiv.style.width;
-// startMenu.style.height = menuDiv.style.height;
-
-// let startButton = document.createElement('button');
-// startButton.id = 'startButton';
-// startButton.innerHTML = 'START';
-// startButton.addEventListener('click', animate)
-// startMenu.appendChild(startButton);
-
 
 let canvas = document.getElementById('myCanvas');
 canvas.width = window.innerWidth;
@@ -117,6 +85,12 @@ let goatImg = new Image(100, 100);
 goatImg.src = '/assets/goats/goat.png';
 canvas.appendChild(goatImg);
 
+
+let branchImg = new Image(100, 100);
+branchImg.src = '/assets/branch2.png';
+canvas.appendChild(branchImg);
+
+
 let TO_RADIANS = Math.PI/180;
 let degrees = 10;
 
@@ -132,11 +106,6 @@ function Goat (x, y, dx, dy, height, width) {
   this.dygravity = -randomFloatFromRange(0.5,1);
 
   this.draw = function(){
-    // console.log('drawing');
-    // let goatX = this.x;
-    // let goatY = this.y;
-    // let goatH = 100;
-    // let goatW = 100;
 
     ctx.globalAlpha = 1;
     if (gravity == false){
@@ -224,12 +193,14 @@ function animate(){
 
   for (let i=0; i<branches.length; i++) {
     ctx.globalAlpha = 1;
-    ctx.beginPath();
-    ctx.moveTo(branches[i].x1, branches[i].y);
-    ctx.lineTo(branches[i].x2, branches[i].y);
-    ctx.strokeStyle = 'brown';
-    ctx.lineWidth = 5;
-    ctx.stroke();
+    // ctx.beginPath();
+    // ctx.moveTo(branches[i].x1, branches[i].y);
+    // ctx.lineTo(branches[i].x2, branches[i].y);
+    // ctx.strokeStyle = 'brown';
+    // ctx.lineWidth = 5;
+    // ctx.stroke();
+
+    ctx.drawImage(branchImg, branches[i].x1, branches[i].y - 40, 150, 50)
   }
 
   for(var i = 0; i < staticGoatsArr.length; i++){
