@@ -4,7 +4,11 @@ startButton.addEventListener('click', startGame)
 
 function startGame() {
   gameOver = false;
-  newGame = true;
+  liveCounter = 0;
+  points = 0;
+  for (var i = 0; i < liveArr.length; i++) {
+    liveArr[i].src = aliveGoat
+  }
   animate();
   document.getElementById('startDiv').style.display = 'none';
   document.getElementById('header').classList.remove('startHeader');
@@ -59,8 +63,8 @@ live3.src = aliveGoat;
 
 let liveArr = [live1, live2, live3];
 
-let newGame = false;
 let gameOver = false;
+let newGame = false;
 
 function randomIntFromRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
@@ -155,7 +159,7 @@ function Goat (x, y, dx, dy, height, width) {
   }
 
   this.update = function(){
-    // console.log('updating');
+    console.log('this.dy:', this.dy);
     let hit = branches.filter(goat => this.x < (goat.x2) && this.x > (goat.x1) && this.y >  (goat.y-goatWidth) && this.y < (goat.y+16))
     if(gravity == true){
       if(hit.length > 0){
@@ -163,7 +167,12 @@ function Goat (x, y, dx, dy, height, width) {
           staticGoatsArr.push(this);
           // console.log('our static goats', staticGoatsArr.length);
           generateGoatStartingCoords();
-          goat = new Goat (startingX, startingY, 0, 4, 100, 100);
+          if (staticGoatsArr.length % 5 === 0) {
+            this.dy *= 1.25;
+            goat = new Goat (startingX, startingY, 0, this.dy, 100, 100);
+          } else {
+            goat = new Goat (startingX, startingY, 0, this.dy, 100, 100);
+          }
           points += pointsPerGoat;
           pointDiv.innerHTML = points;
 
@@ -177,15 +186,8 @@ function Goat (x, y, dx, dy, height, width) {
         displaySplode = true;
 
         generateGoatStartingCoords();
-        if (newGame === true) {
-          goat = new Goat (startingX, startingY, 0, 4, 100, 100);
-          newGame = false;
-        } else if (staticGoatsArr.length % 5 === 0) {
-          this.newDeltaY = 1.25 * this.dy;
-          goat = new Goat (startingX, startingY, 0, this.newDeltaY, 100, 100)
-        } else {
-          goat = new Goat (startingX, startingY, 0, this.dy, 100, 100);
-        }
+
+        goat = new Goat (startingX, startingY, 0, this.dy, 100, 100);
         goat.x = startingX;
         goat.y = startingY;
         audio.play();
@@ -194,6 +196,7 @@ function Goat (x, y, dx, dy, height, width) {
           liveArr[liveCounter-1].src = deadGoat;
           if (liveCounter === 3) {
             gameOver = true;
+            newGame = true;
             staticGoatsArr = [];
             liveCounter = 0;
             live1.src = aliveGoat;
@@ -274,7 +277,6 @@ function animate(){
   }
 
   if(!gameOver) {
-    newGame = true;
     goat.update();
   }
 
