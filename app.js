@@ -45,18 +45,67 @@ let branches = [
   {x1: 750, x2: 890, y: 525},
 ]
 
-let goats = ['/assets/goats/cute-goat.png', '/assets/goats/cute-goat-1.png', '/assets/goats/cute-goat-2.png', '/assets/goats/cute-goat-3.png',  '/assets/goats/cute-goat-4.png',  '/assets/goats/cute-goat-5.png', '/assets/goats/cute-goat-6.png', '/assets/goats/cute-goat-7.png', '/assets/goats/cute-goat-8.png']
+let goats = ['url("/assets/goats/cute-goat.png")', 'url("/assets/goats/cute-goat-1.png")', 'url("/assets/goats/cute-goat-2.png")', 'url("/assets/goats/cute-goat-3.png")',  'url("/assets/goats/cute-goat-4.png")',  'url("/assets/goats/cute-goat-5.png")', 'url("/assets/goats/cute-goat-6.png")', 'url("/assets/goats/cute-goat-7.png")', 'url("/assets/goats/cute-goat-8.png")']
 
 let leftArrow = document.getElementById('leftSelect');
 let rightArrow = document.getElementById('rightSelect');
 let goatSelects = document.getElementsByClassName('goatImg');
+for (let i=0; i<goatSelects.length; i++) {
+  goatSelects[i].style.backgroundImage = goats[i];
+  goatSelects[i].style.backgroundSize = 'contain';
+  goatSelects[i].addEventListener('click', selectThisGoat);
+}
 leftArrow.addEventListener('click', selectLeft);
 rightArrow.addEventListener('click', selectRight);
 
 function selectLeft() {
+  if (goatSelects[0].style.backgroundImage === goats[0]) {
+    console.log('NO PREV PHOTO')
+  } else {
+    for (let i=0; i<goatSelects.length; i++){
+      goatSelects[i].style.backgroundImage = goats[goats.indexOf(goatSelects[i].style.backgroundImage) - 1];
+      if (goatSelects[i].style.border === '1px solid skyblue') {
+        goatSelects[i].style.border = 'none';
+      }
+    }
+  }
 }
 
 function selectRight() {
+  if (goatSelects[goatSelects.length-1].style.backgroundImage === goats[goats.length-1]) {
+    console.log('NO NEXT PHOTO')
+  } else {
+    for (let i=0; i<goatSelects.length; i++){
+      goatSelects[i].style.backgroundImage = goats[goats.indexOf(goatSelects[i].style.backgroundImage) + 1];
+      if (goatSelects[i].style.border === '1px solid skyblue') {
+        goatSelects[i].style.border = 'none';
+      }
+    }
+  }
+}
+
+let goatImg = new Image(100, 100);
+goatImg.src = '/assets/goats/cute-goat.png';
+canvas.appendChild(goatImg);
+
+function selectThisGoat() {
+  for (let i=0; i<goatSelects.length; i++) {
+    if (goatSelects[i].style.border === '1px solid skyblue') {
+      goatSelects[i].style.border = 'none';
+    }
+  }
+  this.style.border = '1px solid skyblue'
+  let chosenGoat = this.style.backgroundImage.split('');
+  chosenGoat.pop();
+  chosenGoat.pop();
+  chosenGoat.shift();
+  chosenGoat.shift();
+  chosenGoat.shift();
+  chosenGoat.shift();
+  chosenGoat.shift();
+  chosenGoat.join('')
+  goatImg.src = chosenGoat.join('')
+  console.log(chosenGoat.join(''))
 
 }
 
@@ -137,10 +186,6 @@ function Splode (x){
     this.draw();
   }
 }
-
-let goatImg = new Image(100, 100);
-goatImg.src = '/assets/goats/cute-goat-2.png';
-canvas.appendChild(goatImg);
 
 
 let branchImg = new Image(100, 100);

@@ -267,3 +267,13 @@ canvas {
 #leftSelect, #rightSelect {
   height: 5vh;
 }
+
+.goatImg {
+  width: 150px;
+  height: 150px;
+}
+
+.goatInfo {
+  width: 150px;
+  height: 150px;
+}
