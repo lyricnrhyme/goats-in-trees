@@ -1,40 +1,39 @@
-let game = document.createElement('div');
-game.id = 'game';
-game.style.width = window.innerWidth;
-game.style.height = window.innerHeight;
-game.style.display = 'flex';
-document.body.appendChild(game);
+// let game = document.createElement('div');
+// game.id = 'game';
+// game.style.width = window.innerWidth;
+// game.style.height = window.innerHeight;
+// game.style.display = 'flex';
+// document.body.appendChild(game);
 
-let canvas = document.createElement('canvas');
-canvas.id = 'myCanvas';
-game.appendChild(canvas);
-canvas.style.width = 1000;
-canvas.style.height = window.innerHeight;
+// let canvas = document.createElement('canvas');
+// canvas.id = 'myCanvas';
+// game.appendChild(canvas);
+// canvas.style.width = 1000;
+// canvas.style.height = window.innerHeight;
 
-let menuDiv = document.createElement('div');
-menuDiv.id = 'menuDiv';
-game.appendChild(menuDiv);
-menuDiv.style.display = 'none';
-menuDiv.style.width = game.style.width - 1000;
-menuDiv.style.height = game.style.height;
+// let menuDiv = document.createElement('div');
+// menuDiv.id = 'menuDiv';
+// game.appendChild(menuDiv);
+// menuDiv.style.display = 'none';
+// menuDiv.style.width = game.style.width - 1000;
+// menuDiv.style.height = game.style.height;
 
-let startMenu = document.createElement('div');
-startMenu.id = 'startMenu';
-menuDiv.appendChild(startMenu);
-startMenu.style.width = menuDiv.style.width;
-startMenu.style.height = menuDiv.style.height;
+// let startMenu = document.createElement('div');
+// startMenu.id = 'startMenu';
+// menuDiv.appendChild(startMenu);
+// startMenu.style.width = menuDiv.style.width;
+// startMenu.style.height = menuDiv.style.height;
 
-let startButton = document.createElement('button');
-startButton.id = 'startButton';
-startButton.innerHTML = 'START';
-startButton.addEventListener('click', animate)
-startMenu.appendChild(startButton);
+// let startButton = document.createElement('button');
+// startButton.id = 'startButton';
+// startButton.innerHTML = 'START';
+// startButton.addEventListener('click', animate)
+// startMenu.appendChild(startButton);
 
 
-
-// let canvas = document.getElementById('myCanvas');
-// canvas.width = window.innerWidth;
-// canvas.height = window.innerHeight;
+let canvas = document.getElementById('myCanvas');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 let ctx = canvas.getContext('2d');
 
@@ -251,6 +250,6 @@ function animate(){
 generateGoatStartingCoords();
 goat = new Goat (startingX, startingY, 0, 4, goatWidth, goatWidth);
 console.log('static goats', staticGoatsArr.length);
-// animate();
+animate();
 
 
