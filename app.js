@@ -6,6 +6,7 @@ function startGame() {
   gameOver = false;
   liveCounter = 0;
   points = 0;
+  pointDiv.innerHTML = points;
   for (var i = 0; i < liveArr.length; i++) {
     liveArr[i].src = aliveGoat
   }
@@ -159,7 +160,8 @@ function Goat (x, y, dx, dy, height, width) {
   }
 
   this.update = function(){
-    console.log('this.dy:', this.dy);
+    let newdy = this.dy;
+
     let hit = branches.filter(goat => this.x < (goat.x2) && this.x > (goat.x1) && this.y >  (goat.y-goatWidth) && this.y < (goat.y+16))
     if(gravity == true){
       if(hit.length > 0){
@@ -168,10 +170,14 @@ function Goat (x, y, dx, dy, height, width) {
           // console.log('our static goats', staticGoatsArr.length);
           generateGoatStartingCoords();
           if (staticGoatsArr.length % 5 === 0) {
-            this.dy *= 1.25;
-            goat = new Goat (startingX, startingY, 0, this.dy, 100, 100);
+            if(this.dy === newdy) {
+              newdy = this.dy * 1.25;
+            } else {
+              newdy *= 1.25;
+            }
+            goat = new Goat (startingX, startingY, 0, newdy, 100, 100);
           } else {
-            goat = new Goat (startingX, startingY, 0, this.dy, 100, 100);
+            goat = new Goat (startingX, startingY, 0, newdy, 100, 100);
           }
           points += pointsPerGoat;
           pointDiv.innerHTML = points;
@@ -187,7 +193,7 @@ function Goat (x, y, dx, dy, height, width) {
 
         generateGoatStartingCoords();
 
-        goat = new Goat (startingX, startingY, 0, this.dy, 100, 100);
+        goat = new Goat (startingX, startingY, 0, newdy, 100, 100);
         goat.x = startingX;
         goat.y = startingY;
         audio.play();
@@ -199,9 +205,11 @@ function Goat (x, y, dx, dy, height, width) {
             newGame = true;
             staticGoatsArr = [];
             liveCounter = 0;
+            goat = new Goat (startingX, startingY, 0, 4, 100, 100);
             live1.src = aliveGoat;
             live2.src = aliveGoat;
             live3.src = aliveGoat;
+            stopAnimation();
             document.getElementById('startDiv').style.display = 'flex';
             if (points > highScore) {
               highScore = points;
@@ -217,6 +225,7 @@ function Goat (x, y, dx, dy, height, width) {
       this.y += this.dygravity;
     }
     this.draw();
+    console.timeEnd("Start of Update");
   }
 }
 
@@ -252,8 +261,16 @@ function turnGravityOff(){
   }
 }
 
+var requestId = "";
+
+function stopAnimation(e) {
+  cancelAnimationFrame(requestId);
+}
+
 function animate(){
-  requestAnimationFrame(animate);
+  // requestAnimationFrame(animate);
+  requestId = requestAnimationFrame(animate);
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   for (let i=0; i<branches.length; i++) {
