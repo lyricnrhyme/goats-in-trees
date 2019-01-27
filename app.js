@@ -5,6 +5,7 @@ startButton.addEventListener('click', startGame)
 function startGame() {
   animate();
   document.getElementById('startDiv').style.display = 'none';
+  document.getElementById('header').classList.remove('startHeader');
 }
 
 let canvas = document.getElementById('myCanvas');
@@ -89,13 +90,13 @@ function Splode (x){
   this.alpha = 0;
   this.da = 0.1;
   this.active = false;
-  this.height = 100;
-  this.width = 100;
+  this.height = 150;
+  this.width = 150;
 
   this.draw = function(){
     if (splodeCounter < 35) {
       ctx.globalAlpha = this.alpha;
-      ctx.drawImage(splodeImg, this.x, (canvas.height - 55), 100, 100);
+      ctx.drawImage(splodeImg, this.x - 45, (canvas.height - 70), 150, 150);
     } else {
       displaySplode = false;
     }
@@ -166,7 +167,7 @@ function Goat (x, y, dx, dy, height, width) {
       }
 
       if(this.y - this.height > canvas.height){
-        splode = new Splode(this.x, -10, 100, 100);
+        splode = new Splode(this.x, 0, 100, 100);
         splodeCounter = 0;
         displaySplode = true;
 
@@ -182,9 +183,7 @@ function Goat (x, y, dx, dy, height, width) {
     } else {
       this.x += this.dxgravity;
       this.y += this.dygravity;
-
     }
-
     this.draw();
   }
 }
