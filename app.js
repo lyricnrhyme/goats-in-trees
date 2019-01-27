@@ -10,6 +10,8 @@ function startGame() {
   for (var i = 0; i < liveArr.length; i++) {
     liveArr[i].src = aliveGoat;
   }
+
+  bigRedButton.classList.add('bigRedButton');
   setTimeout(function(){
       animate();
     }, 2500);
@@ -50,6 +52,9 @@ let highScore = 0;
 let points = 0;
 let pointsPerGoat = 20;
 let pointDiv = document.getElementById('points');
+
+let previousScoreSpan = document.getElementById('previousScore');
+let previousScoreContainer = document.getElementById('previousScoreContainer');
 
 let liveCounter = 0;
 
@@ -254,6 +259,7 @@ function moveGoat(e){
 function turnGravityOff(){
   if (gravity == true){
     gravity = false;
+    bigRedButton.classList.add('disabledButton');
     audio.currentTime = 5;
     goatsBleating.play();
 
@@ -268,6 +274,9 @@ var requestId = "";
 function stopAnimation(e) {
   cancelAnimationFrame(requestId);
   document.getElementById('header').classList.add('startHeader');
+  bigRedButton.classList.remove('bigRedButton');
+  previousScoreSpan.innerHTML = points;
+  previousScoreContainer.classList.remove('scoreSummaryHidden');
 }
 
 function animate(){

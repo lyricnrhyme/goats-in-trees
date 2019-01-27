@@ -9,22 +9,8 @@ body {
   background-color: skyblue;
 }
 
-#bigRedButton {
-  font-family: "Baloo Thambi", cursive;
-  width: 70px;
-  height: 70px;
-  border-radius: 50px;
-  box-shadow: 5px 2px 5px grey;
-  border: none;
-  position: absolute;
-  top: 15%;
-  left: 2%;
-}
-
-
-
 .header {
-  font-family: "Baloo Thambi", cursive;
+  font-family: "Baloo Thambi", sans;
   font-size: 14px;
   color: white;
   position: absolute;
@@ -95,9 +81,64 @@ canvas {
   width: 200px;
 }
 
-#bigRedButton {
+.bigRedButton {
   background-color: red;
   color: white;
+  font-family: "Baloo Thambi", sans;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  box-shadow: 5px 2px 5px grey;
+  border: none;
+  position: absolute;
+  top: 15%;
+  left: 2%;
+  font-size: 20px;
+  line-height: 20px;
+
+  -webkit-animation: fadein 15s ease-in; /* Safari, Chrome and Opera > 12.1 */
+   -moz-animation: fadein 15s ease-in; /* Firefox < 16 */
+    -ms-animation: fadein 15s ease-in; /* Internet Explorer */
+     -o-animation: fadein 15s ease-in; /* Opera < 12.1 */
+        animation: fadein 15s ease-in;
+}
+
+.bigRedButton:active {
+    outline: none;
+    border: none;
+}
+
+.bigRedButton:focus {
+    outline: none;
+    border: none;
+}
+
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.disabledButton {
+  background-color: darkgrey;
 }
 
 @keyframes bounce {
@@ -115,7 +156,7 @@ canvas {
 
 #shop{
   color: white;
-  font-family: "Baloo Thambi", cursive;
+  font-family: "Baloo Thambi", sans;
   font-size: 18px;
   background: none;
   border: none;
@@ -262,9 +303,23 @@ canvas {
   background: white;
   color: rgb(103, 196, 234);
   border: none;
-  font-family: "Baloo Thambi", cursive;
+  font-family: "Baloo Thambi", sans;
 }
 
 .redButtonText {
   color: #f4425f;
+}
+
+.scoreSummaryHidden{
+  visibility: hidden;
+}
+
+.scoreSummary {
+  position: absolute;
+  top: 20%;
+  left: 25%;
+}
+
+.wideScore {
+  width: 120px;
 }

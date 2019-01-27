@@ -42,9 +42,12 @@
       </span>
     </h1>
   </div>
-  <button id="bigRedButton">DO NOT PRESS</button>
+  <button id="bigRedButton"> DO NOT PRESS</button>
 
   <div id="startDiv">
+    <div class="scoreSummaryHidden scoreSummary" id="previousScoreContainer">
+      <span class="startText">Your score was </span><span id="previousScore" class="startText"></span><span class="startText">. Good job! You only killed 3 adorable skydiving goats.</span>
+    </div>
     <div class="startTextContainer">
       <div class="startText">Help these cute skydiving goats get onto the tree branches.</div>
       <div class="startText withArrowKeys">
@@ -64,7 +67,7 @@
     <div class="scoreAndPointsContainer">
       <div class="scoreContainer">
         <div class="score points" id="highScore">0</div>
-        <div class="score">high score</div>
+        <div class="score wideScore">high score</div>
       </div>
       <div class="scoreContainer">
         <div class="score points" id="points">0</div>
