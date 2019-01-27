@@ -8,9 +8,11 @@ function startGame() {
   points = 0;
   pointDiv.innerHTML = points;
   for (var i = 0; i < liveArr.length; i++) {
-    liveArr[i].src = aliveGoat
+    liveArr[i].src = aliveGoat;
   }
-  animate();
+  setTimeout(function(){
+      animate();
+    }, 2500);
   document.getElementById('startDiv').style.display = 'none';
   document.getElementById('header').classList.remove('startHeader');
 }
@@ -265,6 +267,7 @@ var requestId = "";
 
 function stopAnimation(e) {
   cancelAnimationFrame(requestId);
+  document.getElementById('header').classList.add('startHeader');
 }
 
 function animate(){

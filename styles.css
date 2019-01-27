@@ -30,7 +30,7 @@ body {
   position: absolute;
   top: 7px;
   left: 35px;
-  width: 550px;
+  width: 750px;
   z-index: 1000;
   transition: top 2s, left 2s, font-size 2s;
 }
@@ -38,10 +38,10 @@ body {
 .startHeader {
   position: absolute;
   top: 25%;
-  left: 35%;
+  left: 25%;
   font-size: 20px;
-  -webkit-transform: translate(-30%, -30%);
-  transform: translate(-30%, -30%);
+/*  -webkit-transform: translate(-30%, -30%);
+  transform: translate(-30%, -30%);*/
   transition: top 2s, left 2s, font-size 2s;
 }
 
@@ -56,6 +56,12 @@ h1 span {
   position: relative;
   top: 5px;
   animation: bounce .3s ease infinite alternate;
+}
+
+#lilgoatspan {
+  position: relative;
+  top: 5px;
+  animation: bounce .1s ease infinite alternate;
 }
 
 h1 span:nth-child(2) {animation-delay: .2s}
@@ -195,13 +201,14 @@ canvas {
   left:0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(79, 94, 76, .9);
+  background-color: rgba(103, 196, 234, .9);
   z-index: 4;
 }
 
 .startText {
   color: white;
-  font-family: Arial;
+  /*font-family: Arial;*/
+  font-family: 'Hind', sans-serif;
   font-size: 22px;
   height: 50px;
 }
@@ -213,10 +220,10 @@ canvas {
   width: 700px;
   height: 300px;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  top: 35%;
+  left: 25%;
+/*  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);*/
   line-height: 50px;
   box-sizing: border-box;
 }
@@ -241,6 +248,7 @@ canvas {
 
 .startTextEmphatic {
   margin-top: 0;
+  font-size: 28px;
 }
 
 #startButton {
@@ -251,8 +259,12 @@ canvas {
   margin-top: 25px;
   border-radius: 5px;
   font-size: 32px;
-  background: skyblue;
-  color: white;
+  background: white;
+  color: rgb(103, 196, 234);
   border: none;
   font-family: "Baloo Thambi", cursive;
+}
+
+.redButtonText {
+  color: #f4425f;
 }
