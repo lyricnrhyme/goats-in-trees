@@ -38,6 +38,7 @@ let branches = [
 
 // pairs of x,y coordinates, function that generates the branches and also defines the areas where the goat stops
 
+let highScore = 0;
 let points = 0;
 let pointsPerGoat = 20;
 let pointDiv = document.getElementById('points');
@@ -198,6 +199,12 @@ function Goat (x, y, dx, dy, height, width) {
             live2.src = aliveGoat;
             live3.src = aliveGoat;
             document.getElementById('startDiv').style.display = 'flex';
+            if (points > highScore) {
+              highScore = points;
+              document.getElementById('highScore').innerHTML = highScore;
+            }
+            points = 0;
+            document.getElementById('points').innerHTML = 0;
           }
         }
       }
