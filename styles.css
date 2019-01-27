@@ -9,6 +9,18 @@ body {
   background-color: skyblue;
 }
 
+#bigRedButton {
+  font-family: "Baloo Thambi", cursive;
+  width: 70px;
+  height: 70px;
+  border-radius: 50px;
+  box-shadow: 5px 2px 5px grey;
+  border: none;
+  position: absolute;
+  top: 15%;
+  left: 2%;
+}
+
 .header {
   font-family: "Baloo Thambi", sans;
   font-size: 14px;
@@ -322,4 +334,28 @@ canvas {
 
 .wideScore {
   width: 120px;
+  font-family: "Baloo Thambi", cursive;
+}
+
+#goats {
+  display: flex;
+}
+
+#goatSelection {
+  display: flex;
+  align-items: center;
+}
+
+#leftSelect, #rightSelect {
+  height: 5vh;
+}
+
+.goatImg {
+  width: 150px;
+  height: 150px;
+}
+
+.goatInfo {
+  width: 150px;
+  height: 150px;
 }

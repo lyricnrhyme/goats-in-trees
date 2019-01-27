@@ -9,6 +9,9 @@
   <title>Are Goats Responsive?</title>
 </head>
 <body>
+  <audio id='bgMusic'>
+    <source src='/assets/watermelonPopsicle.mp3'>
+  </audio>
   <!-- <img id="goat" src="/assets/goat.png" alt="goat"> -->
   <canvas id="myCanvas" width="100%" height="100%"></canvas>
   <!-- <div id="game">
@@ -58,6 +61,15 @@
       <button id="startButton">START</div>
       <!-- <button id="rules">HOW TO PLAY</button> -->
       <!-- <button id="shop" class="topLink">SHOP</button> -->
+      <div id='goatSelection'>
+        <img id='leftSelect' src='/assets/whiteArrowLeft.png'>
+        <div id='goats'>
+          <div class='goatInfo'><div class='goatImg'></div></div>
+          <div class='goatInfo'><div class='goatImg'></div></div>
+          <div class='goatInfo'><div class='goatImg'></div></div>
+        </div>
+        <img id='rightSelect' src='/assets/whiteArrowRight.png'>
+      </div>
     </div>
   </div>
   <!-- <button id="bigRedButton">Big Red Button</button> -->
