@@ -9,18 +9,6 @@ body {
   background-color: skyblue;
 }
 
-#bigRedButton {
-  font-family: "Baloo Thambi", cursive;
-  width: 70px;
-  height: 70px;
-  border-radius: 50px;
-  box-shadow: 5px 2px 5px grey;
-  border: none;
-  position: absolute;
-  top: 15%;
-  left: 2%;
-}
-
 .header {
   font-family: "Baloo Thambi", sans;
   font-size: 14px;
@@ -226,13 +214,7 @@ canvas {
   margin: 7px;
 }
 
-/*@font-face {
-  font-family: Blocky;
-  src: url(BLOCKHEAD.ttf) format(truetype);
-}*/
-
 .score {
-  /*font-family: Blocky;*/
   font-family: 'Notable', sans-serif;
   color: white;
   font-size: 14px;
@@ -242,6 +224,8 @@ canvas {
 .points {
   font-size: 24px;
 }
+
+
 
 .lives {
   width: 60px;
@@ -260,7 +244,6 @@ canvas {
 
 .startText {
   color: white;
-  /*font-family: Arial;*/
   font-family: 'Hind', sans-serif;
   font-size: 22px;
   height: 50px;
@@ -275,8 +258,6 @@ canvas {
   position: absolute;
   top: 35%;
   left: 25%;
-/*  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);*/
   line-height: 50px;
   box-sizing: border-box;
 }
@@ -333,8 +314,8 @@ canvas {
 }
 
 .wideScore {
+  font-family: 'Notable', sans-serif;
   width: 120px;
-  font-family: "Baloo Thambi", cursive;
 }
 
 #goats {
