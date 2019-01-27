@@ -254,3 +254,16 @@ canvas {
   border: none;
   font-family: "Baloo Thambi", cursive;
 }
+
+#goats {
+  display: flex;
+}
+
+#goatSelection {
+  display: flex;
+  align-items: center;
+}
+
+#leftSelect, #rightSelect {
+  height: 5vh;
+}

@@ -45,6 +45,21 @@ let branches = [
   {x1: 750, x2: 890, y: 525},
 ]
 
+let goats = ['/assets/goats/cute-goat.png', '/assets/goats/cute-goat-1.png', '/assets/goats/cute-goat-2.png', '/assets/goats/cute-goat-3.png',  '/assets/goats/cute-goat-4.png',  '/assets/goats/cute-goat-5.png', '/assets/goats/cute-goat-6.png', '/assets/goats/cute-goat-7.png', '/assets/goats/cute-goat-8.png']
+
+let leftArrow = document.getElementById('leftSelect');
+let rightArrow = document.getElementById('rightSelect');
+let goatSelects = document.getElementsByClassName('goatImg');
+leftArrow.addEventListener('click', selectLeft);
+rightArrow.addEventListener('click', selectRight);
+
+function selectLeft() {
+}
+
+function selectRight() {
+
+}
+
 // pairs of x,y coordinates, function that generates the branches and also defines the areas where the goat stops
 
 let highScore = 0;
