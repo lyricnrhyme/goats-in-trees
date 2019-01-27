@@ -76,7 +76,7 @@ let startingX;
 let startingY = -50;
 
 function generateGoatStartingCoords(min, max){
-  startingX = randomIntFromRange(0 + goatWidth, canvas.width - goatWidth);
+  startingX = randomIntFromRange(175 + goatWidth, canvas.width - goatWidth - 175);
   console.log('starting X', startingX);
 }
 
