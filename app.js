@@ -159,7 +159,6 @@ function Goat (x, y, dx, dy, height, width) {
   this.update = function(){
     console.log('this.dy:', this.dy);
     let hit = branches.filter(goat => this.x < (goat.x2) && this.x > (goat.x1) && this.y >  (goat.y-goatWidth) && this.y < (goat.y+16))
-
     if(gravity == true){
       if(hit.length > 0){
         this.y = hit[0].y - goatWidth;
@@ -197,6 +196,10 @@ function Goat (x, y, dx, dy, height, width) {
             gameOver = true;
             newGame = true;
             staticGoatsArr = [];
+            liveCounter = 0;
+            live1.src = aliveGoat;
+            live2.src = aliveGoat;
+            live3.src = aliveGoat;
             document.getElementById('startDiv').style.display = 'flex';
           }
         }
