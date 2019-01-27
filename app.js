@@ -120,7 +120,7 @@ function Splode (x){
 }
 
 let goatImg = new Image(100, 100);
-goatImg.src = '/assets/goats/goat.png';
+goatImg.src = '/assets/goats/cute-goat-2.png';
 canvas.appendChild(goatImg);
 
 
