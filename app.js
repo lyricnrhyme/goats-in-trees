@@ -186,7 +186,8 @@ function Goat (x, y, dx, dy, height, width) {
           liveCounter ++;
           liveArr[liveCounter-1].src = deadGoat;
           if (liveCounter === 3) {
-            gameOver = true
+            gameOver = true;
+            document.getElementById('startDiv').style.display = 'flex';
           }
         }
       }
