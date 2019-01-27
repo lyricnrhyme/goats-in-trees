@@ -9,25 +9,18 @@
   <title>Are Goats Responsive?</title>
 </head>
 <body>
+
+<!-- ***** AUDIO FILE ***** -->
   <audio id='bgMusic'>
     <source src='/assets/watermelonPopsicle.mp3'>
   </audio>
-  <!-- <img id="goat" src="/assets/goat.png" alt="goat"> -->
+
+<!-- ***** CANVAS ***** -->
   <canvas id="myCanvas" width="100%" height="100%"></canvas>
-  <!-- <div id="game">
-    <div id="menuDiv">
-      <div id="startMenu">
-        <button id="startButton" onClick="animate">
-          START
-        </button>
-      </div>
-    </div>
-  </div> -->
-    <div id="header" class="header startHeader">
+
+<!-- ***** HEADER BOUNCING TEXT ***** -->
+  <div id="header" class="header startHeader">
     <h1>
-      <!-- <span>
-        <img class="lilgoat" src="/assets/lilgoat.png"/>
-      </span> -->
       <span>G</span>
       <span>O</span>
       <span>A</span>
@@ -45,37 +38,70 @@
       </span>
     </h1>
   </div>
-  <button id="bigRedButton"> DO NOT PRESS</button>
 
-  <div id="startDiv">
-    <div class="scoreSummaryHidden scoreSummary" id="previousScoreContainer">
-      <span class="startText">Your score was </span><span id="previousScore" class="startText"></span><span class="startText">. Good job! You only killed 3 adorable skydiving goats.</span>
-    </div>
-    <div class="startTextContainer">
-      <div class="startText">Help these cute skydiving goats get onto the tree branches.</div>
-      <div class="startText withArrowKeys">
-        <span class="startText">Use</span><span class="startText"><img src="/assets/arrowkey-left.png" class="arrowkeys"/></span><span class="startText">and</span><span class="startText"><img class="arrowkeys" src="/assets/arrowkeys-right.png"/></span><span class="startText">to move the goats left and right.</span>
+<!-- ***** BIG RED BUTTON ***** -->
+  <button id="bigRedButton">
+    DO NOT PRESS
+  </button>
+
+<!-- ***** START SCREEN ***** -->  
+  <div id="startScreenContainer">
+    <div id="startDiv">
+      <div class="scoreSummaryHidden scoreSummary" id="previousScoreContainer">
+        <span class="startText">Your score was </span><span id="previousScore" class="startText"></span><span class="startText">. Good job! You only killed 3 adorable skydiving goats.</span>
       </div>
-      <div class="startText priorToLast">And whatever you do, please... for the love of goats,</div>
-      <div class="startText startTextEmphatic">DO NOT PRESS the <span class="redButtonText">big red button.</span></div>
-      <button id="startButton">START</div>
-      <!-- <button id="rules">HOW TO PLAY</button> -->
-      <!-- <button id="shop" class="topLink">SHOP</button> -->
-      <div id="goatSelectContainer">
-        <div id='goatSelection'>
-          <img id='leftSelect' src='/assets/whiteArrowLeft.png'>
-          <div id='goats'>
-            <div class='goatInfo'><div class='goatImg'></div></div>
-            <div class='goatInfo'><div class='goatImg'></div></div>
-            <div class='goatInfo'><div class='goatImg'></div></div>
-          </div>
-          <img id='rightSelect' src='/assets/whiteArrowRight.png'>
+      <div class="startTextContainer">
+        <div class="startText">
+          Help these cute skydiving goats get onto the tree branches.
         </div>
+        <div class="startText withArrowKeys">
+          <span class="startText">
+            Use
+          </span>
+          <span class="startText">
+            <img src="/assets/arrowkey-left.png" class="arrowkeys"/>
+          </span>
+          <span class="startText">
+            and
+          </span>
+          <span class="startText">
+            <img class="arrowkeys" src="/assets/arrowkeys-right.png"/>
+          </span>
+          <span class="startText">
+            to move the goats left and right.
+          </span>
+        </div>
+        <div class="startText priorToLast">
+          And whatever you do, please... for the love of goats,
+        </div>
+        <div class="startText startTextEmphatic">
+          DO NOT PRESS the 
+          <span class="redButtonText">
+            big red button.
+          </span>
+          <div class="chooseAGoatContainer">
+              <span class="chooseAGoat">Choose a goat friend to save from the below arsenal of cute goats.</span>
+          </div>
+        </div>
+        <div id="goatSelectContainer">
+            <div id='goatSelection'>
+              <img id='leftSelect' src='/assets/whiteArrowLeft.png'>
+              <div id='goats'>
+                <div class='goatInfo'><div class='goatImg'></div></div>
+                <div class='goatInfo'><div class='goatImg'></div></div>
+                <div class='goatInfo'><div class='goatImg'></div></div>
+              </div>
+              <img id='rightSelect' src='/assets/whiteArrowRight.png'>
+            </div>
+          </div>
+        <button id="startButton">
+            START
+        </button>
       </div>
     </div>
   </div>
-  <!-- <button id="bigRedButton">Big Red Button</button> -->
 
+<!-- ***** SCORE AND LIVES CONTAINER ***** -->
   <div class="infoContainer">
     <div class="topLinkContainer">
     <div class="scoreAndPointsContainer">
@@ -94,9 +120,6 @@
       </div>
     </div>
   </div>
-
-  <!-- <canvas id="myCanvas" width="100%" height="100%"></canvas> -->
-  <!-- <img id="splode" src="/assets/goatsplode.png" alt="kaboom!"> -->
   <script src="app.js"></script>
 </body>
 </html>

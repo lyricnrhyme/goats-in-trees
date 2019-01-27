@@ -1,26 +1,18 @@
 body {
   margin: 0;
   padding: 0;
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-around; */
   background: url("assets/background.jpg") no-repeat bottom;
   background-size: 100% 100%;
-  background-color: skyblue;
 }
 
-#bigRedButton {
-  font-family: "Baloo Thambi", cursive;
-  width: 70px;
-  height: 70px;
-  border-radius: 50px;
-  box-shadow: 5px 2px 5px grey;
-  border: none;
-  position: absolute;
-  top: 15%;
-  left: 2%;
+canvas {
+  width: 100%;
+  height: 100vh;
+  background: url("assets/goat-tree.png") no-repeat center;
+  background-size: contain;
 }
 
+/* ***** GOATS IN A TREE HEADER TEXT ***** */
 .header {
   font-family: "Baloo Thambi", sans;
   font-size: 14px;
@@ -33,15 +25,28 @@ body {
   transition: top 2s, left 2s, font-size 2s;
 }
 
+/* ***** GOATS IN A TREE HEADER FOR START SCREEN ***** */
 .startHeader {
   position: absolute;
-  top: 25%;
-  left: 25%;
+  top: 2%;
+  left: 30.5%;
   font-size: 20px;
-/*  -webkit-transform: translate(-30%, -30%);
-  transform: translate(-30%, -30%);*/
   transition: top 2s, left 2s, font-size 2s;
 }
+
+/* ***** GOATS IN A TREE HEADER TEXT ANIMATION ***** */
+h1 span:nth-child(2) {animation-delay: .2s}
+h1 span:nth-child(3) {animation-delay: .3s}
+h1 span:nth-child(4) {animation-delay: .4s}
+h1 span:nth-child(5) {animation-delay: .5s}
+h1 span:nth-child(6) {animation-delay: .6s}
+h1 span:nth-child(7) {animation-delay: .7s}
+h1 span:nth-child(8) {animation-delay: .8s}
+h1 span:nth-child(9) {animation-delay: .9s}
+h1 span:nth-child(10) {animation-delay: 1s}
+h1 span:nth-child(11) {animation-delay: 1.2s}
+h1 span:nth-child(12) {animation-delay: 1.4s}
+h1 span:nth-child(13) {animation-delay: 1.6s}
 
 .lilgoat {
   height: 27px;
@@ -62,37 +67,7 @@ h1 span {
   animation: bounce .1s ease infinite alternate;
 }
 
-h1 span:nth-child(2) {animation-delay: .2s}
-h1 span:nth-child(3) {animation-delay: .3s}
-h1 span:nth-child(4) {animation-delay: .4s}
-h1 span:nth-child(5) {animation-delay: .5s}
-h1 span:nth-child(6) {animation-delay: .6s}
-h1 span:nth-child(7) {animation-delay: .7s}
-h1 span:nth-child(8) {animation-delay: .8s}
-h1 span:nth-child(9) {animation-delay: .9s}
-h1 span:nth-child(10) {animation-delay: 1s}
-h1 span:nth-child(11) {animation-delay: 1.2s}
-h1 span:nth-child(12) {animation-delay: 1.4s}
-h1 span:nth-child(13) {animation-delay: 1.6s}
-
-
-canvas {
-  /* background-color: skyblue;
-  background-image: url("assets/goat-tree.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain; */
-  width: 100%;
-  height: 100vh;
-  background: url("assets/goat-tree.png") no-repeat center;
-  background-size: contain;
-}
-
-#splode {
-  height: 200px;
-  width: 200px;
-}
-
+/* ***** BIG RED BUTTON ***** */
 .bigRedButton {
   background-color: red;
   color: white;
@@ -125,28 +100,34 @@ canvas {
     border: none;
 }
 
-
+/* ***** BIG RED BUTTON KEYFRAMES ***** */
 @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* Firefox < 16 */
 @-moz-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* Internet Explorer */
 @-ms-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ***** GOAT SPLOAD AMAGE ***** */
+#splode {
+  height: 200px;
+  width: 200px;
 }
 
 .disabledButton {
@@ -179,12 +160,11 @@ canvas {
   cursor: pointer;
 }
 
+/* ***** SCORE AND LIVES CONTAINER ***** */
 .infoContainer {
   position: fixed;
   top: 0;
   right: 0;
-  /*background-color: blue;*/
-  /*width: 310px;*/
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -193,31 +173,14 @@ canvas {
   justify-content: flex-end;
 }
 
-.topLinkContainer{
-  /*background-color: red;*/
-}
-
+/* ***** SCORE AND POINTS ***** */
 .scoreAndPointsContainer {
-  /*background-color: green;*/
   display: flex;
   flex-direction: row;
-  /*box-sizing: border-box;*/
   justify-content: flex-end;
 }
 
-.livesContainer {
-  /*background-color: yellow;*/
-  width: 180px;
-  height: 60px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  box-sizing: border-box;
-}
-
 .scoreContainer {
-  /*background-color: orange;*/
   width: 100px;
   height: 60px;
   display: flex;
@@ -226,13 +189,7 @@ canvas {
   margin: 7px;
 }
 
-/*@font-face {
-  font-family: Blocky;
-  src: url(BLOCKHEAD.ttf) format(truetype);
-}*/
-
 .score {
-  /*font-family: Blocky;*/
   font-family: 'Notable', sans-serif;
   color: white;
   font-size: 14px;
@@ -243,9 +200,27 @@ canvas {
   font-size: 24px;
 }
 
+/* ***** LIVES ***** */
+.livesContainer {
+  width: 180px;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+}
+
 .lives {
   width: 60px;
   height: 60px;
+}
+
+
+#startScreenContainer {
+  display: flex;
+  align-content: center;
+  justify-content: space-around;
 }
 
 #startDiv{
@@ -258,35 +233,33 @@ canvas {
   z-index: 4;
 }
 
-.startText {
-  color: white;
-  /*font-family: Arial;*/
-  font-family: 'Hind', sans-serif;
-  font-size: 22px;
-  height: 50px;
-}
-
+/* ***** START SCREEN ***** */
 .startTextContainer {
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 700px;
-  height: 300px;
+  height: 600px;
   position: absolute;
-  top: 35%;
-  left: 25%;
-/*  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);*/
+  top: 15%;
+  left: 30.5%;
   line-height: 50px;
   box-sizing: border-box;
+}
+
+.startText, .chooseAGoatContainer {
+  color: white;
+  font-family: 'Hind', sans-serif;
+  font-size: 22px;
+  height: 15px;
 }
 
 .arrowkeys {
   margin-left: 10px;
   margin-right: 10px;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
 }
 
 .withArrowKeys {
@@ -305,20 +278,6 @@ canvas {
   font-size: 28px;
 }
 
-#startButton {
-  z-index: 2;
-  height: 70px;
-  width: 80%;
-  /*margin-left: 10%;*/
-  margin-top: 25px;
-  border-radius: 5px;
-  font-size: 32px;
-  background: white;
-  color: rgb(103, 196, 234);
-  border: none;
-  font-family: "Baloo Thambi", sans;
-}
-
 .redButtonText {
   color: #f4425f;
 }
@@ -329,15 +288,16 @@ canvas {
 
 .scoreSummary {
   position: absolute;
-  top: 20%;
+  top: 15%;
   left: 25%;
 }
 
 .wideScore {
   width: 120px;
-  font-family: "Baloo Thambi", cursive;
+  font-family: "Notable", sans-serif;
 }
 
+/* ***** START SCREEN GOAT SELECTION ***** */
 #goats {
   display: flex;
 }
@@ -345,12 +305,16 @@ canvas {
 #goatSelectContainer {
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 #goatSelection {
   display: flex;
   align-items: center;
-
+  justify-content: space-around;
+  position: absolute;
+  bottom: 20%;
+  left: 15%;
 }
 
 #leftSelect, #rightSelect {
@@ -358,11 +322,25 @@ canvas {
 }
 
 .goatImg {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
 }
 
 .goatInfo {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
+}
+
+/* ***** START SCREEN START BUTTON ***** */
+#startButton {
+  z-index: 2;
+  height: 65px;
+  width: 80%;
+  margin-top: 60px;
+  border-radius: 5px;
+  font-size: 32px;
+  background: white;
+  color: rgb(103, 196, 234);
+  border: none;
+  font-family: "Baloo Thambi", sans;
 }
