@@ -2,6 +2,9 @@
 let startButton = document.getElementById('startButton');
 startButton.addEventListener('click', startGame)
 
+let bgMusic = document.getElementById('bgMusic');
+bgMusic.play();
+
 function startGame() {
   gameOver = false;
   liveCounter = 0;
