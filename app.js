@@ -20,6 +20,10 @@ function startGame() {
     }, 2500);
   document.getElementById('startDiv').style.display = 'none';
   document.getElementById('header').classList.remove('startHeader');
+
+  timerDiv.style.display = 'block';
+  countDownNum = 3;
+  countDown();
 }
 
 let canvas = document.getElementById('myCanvas');
@@ -114,6 +118,29 @@ function selectThisGoat() {
 }
 
 // pairs of x,y coordinates, function that generates the branches and also defines the areas where the goat stops
+
+let timer;
+let countDownNum;
+let timerDiv = document.getElementById('timer');
+// timerDiv.style.display = 'none';
+
+function countDown() {
+  timer = setInterval(setCountDown, 1000);
+}
+
+function setCountDown() {
+  timerDiv.innerHTML = countDownNum;
+  countDownNum--;
+  if (countDownNum === -2) {
+    timerDiv.innerHTML = '';
+    stopTimer();
+  }
+}
+
+function stopTimer() {
+  clearInterval(timer);
+  timerDiv.style.display = 'none';
+}
 
 let highScore = 0;
 let points = 0;
