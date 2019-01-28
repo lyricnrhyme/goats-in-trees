@@ -338,6 +338,7 @@ var requestId = "";
 
 function stopAnimation(e) {
   console.log("request ID", requestId);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   cancelAnimationFrame(requestId);
   document.getElementById('header').classList.add('startHeader');
   bigRedButton.classList.remove('bigRedButton');
