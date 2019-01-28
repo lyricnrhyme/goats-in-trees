@@ -4,12 +4,10 @@ startButton.addEventListener('click', startGame)
 
 let bgMusic = document.getElementById('bgMusic');
 
-window.onload = function() {
-  bgMusic.play();
-}
 
 
 function startGame() {
+  bgMusic.play();
   gameOver = false;
   liveCounter = 0;
   points = 0;
@@ -281,6 +279,7 @@ function Goat (x, y, dx, dy, height, width) {
           staticGoatsArr = [];
           liveCounter = 0;
           goat = new Goat (startingX, startingY, 0, 4, 100, 100);
+          bgMusic.pause();
           live1.src = aliveGoat;
           live2.src = aliveGoat;
           live3.src = aliveGoat;
@@ -327,6 +326,7 @@ function turnGravityOff(){
       gravity = true;
       goatsBleating.pause();
       gameOver = true;
+      bgMusic.pause();
       newGame = true;
       staticGoatsArr = [];
       liveCounter = 0;
