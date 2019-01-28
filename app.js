@@ -1,46 +1,26 @@
-
-let startButton = document.getElementById('startButton');
-startButton.addEventListener('click', startGame)
-
+//Background music and sounds used
 let bgMusic = document.getElementById('bgMusic');
 bgMusic.play();
+let audio = new Audio('/assets/goatscream.mp3');
+let goatsBleating = new Audio('/assets/goatsbleating.mp3');
 
-function startGame() {
-  gameOver = false;
-  liveCounter = 0;
-  points = 0;
-  pointDiv.innerHTML = points;
-  for (var i = 0; i < liveArr.length; i++) {
-    liveArr[i].src = aliveGoat;
-  }
-
-  bigRedButton.classList.add('bigRedButton');
-  setTimeout(function(){
-      animate();
-    }, 2500);
-  document.getElementById('startDiv').style.display = 'none';
-  document.getElementById('header').classList.remove('startHeader');
-}
-
+//Initial canvas variables decleration
 let canvas = document.getElementById('myCanvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let ctx = canvas.getContext('2d');
 
-window.addEventListener('keydown', moveGoat, false);
-
+//Big red button Lul
 let bigRedButton = document.getElementById('bigRedButton');
 bigRedButton.addEventListener('click', turnGravityOff);
 
+//Initial variable declerations
 let gravity = true;
-
 let staticGoatsArr =[];
 let goat;
 
-let audio = new Audio('/assets/goatscream.mp3');
-let goatsBleating = new Audio('/assets/goatsbleating.mp3');
-
+//Branch placement coordinates
 let branches = [
   {x1: 650, x2: 775, y: 150},
   {x1: 790, x2: 925, y: 250},
@@ -49,6 +29,7 @@ let branches = [
   {x1: 750, x2: 890, y: 525},
 ]
 
+//Goat selection code
 let goats = ['url("/assets/goats/cute-goat.png")', 'url("/assets/goats/cute-goat-1.png")', 'url("/assets/goats/cute-goat-2.png")', 'url("/assets/goats/cute-goat-3.png")',  'url("/assets/goats/cute-goat-4.png")',  'url("/assets/goats/cute-goat-5.png")', 'url("/assets/goats/cute-goat-6.png")', 'url("/assets/goats/cute-goat-7.png")', 'url("/assets/goats/cute-goat-8.png")']
 
 let leftArrow = document.getElementById('leftSelect');
@@ -66,7 +47,6 @@ rightArrow.addEventListener('click', selectRight);
 
 function selectLeft() {
   if (goatSelects[0].style.backgroundImage === goats[0]) {
-    console.log('NO PREV PHOTO')
   } else {
     for (let i=0; i<goatSelects.length; i++){
       goatSelects[i].style.backgroundImage = goats[goats.indexOf(goatSelects[i].style.backgroundImage) - 1];
@@ -79,7 +59,6 @@ function selectLeft() {
 
 function selectRight() {
   if (goatSelects[goatSelects.length-1].style.backgroundImage === goats[goats.length-1]) {
-    console.log('NO NEXT PHOTO')
   } else {
     for (let i=0; i<goatSelects.length; i++){
       goatSelects[i].style.backgroundImage = goats[goats.indexOf(goatSelects[i].style.backgroundImage) + 1];
@@ -111,20 +90,19 @@ function selectThisGoat() {
   chosenGoat.shift();
   chosenGoat.join('')
   goatImg.src = chosenGoat.join('')
-  console.log(chosenGoat.join(''))
-
 }
 
-// pairs of x,y coordinates, function that generates the branches and also defines the areas where the goat stops
-
+//Point variable decleration
 let highScore = 0;
 let points = 0;
 let pointsPerGoat = 20;
 let pointDiv = document.getElementById('points');
 
+//Score variable decleration
 let previousScoreSpan = document.getElementById('previousScore');
 let previousScoreContainer = document.getElementById('previousScoreContainer');
 
+//Goat lives variables decleration and creation
 let liveCounter = 0;
 
 let aliveGoat = '/assets/goat-green.png';
@@ -140,27 +118,11 @@ live3.src = aliveGoat;
 
 let liveArr = [live1, live2, live3];
 
+//New Game variables decleration
 let gameOver = false;
 let newGame = false;
 
-function randomIntFromRange(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min)
-  console.log('running random Int');
-}
-
-function randomFloatFromRange(min, max) {
-    return Math.random() * (max - min + 1) + min
-}
-
-let goatWidth = 100;
-let startingX;
-let startingY = -50;
-
-function generateGoatStartingCoords(min, max){
-  startingX = randomIntFromRange(175 + goatWidth, canvas.width - goatWidth - 175);
-  console.log('starting X', startingX);
-}
-
+//Dead explosion variables decleration and creation
 let splodeCounter = 0;
 
 let splodeImg = new Image(100, 100);
@@ -170,6 +132,29 @@ canvas.appendChild(splodeImg);
 let splode;
 let displaySplode = false;
 
+let goatWidth = 100;
+let startingX;
+let startingY = -50;
+
+//Branch variable decleration and creation
+let branchImg = new Image(100, 100);
+branchImg.src = '/assets/branch2.png';
+canvas.appendChild(branchImg);
+
+// pairs of x,y coordinates, function that generates the branches and also defines the areas where the goat stops
+function randomIntFromRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function randomFloatFromRange(min, max) {
+    return Math.random() * (max - min + 1) + min
+}
+
+function generateGoatStartingCoords(min, max){
+  startingX = randomIntFromRange(175 + goatWidth, canvas.width - goatWidth - 175);
+}
+
+//Function that creates explosion of goats who didn't make it to a branch
 function Splode (x){
   this.x = x;
   this.alpha = 0;
@@ -194,16 +179,13 @@ function Splode (x){
   }
 }
 
-
-let branchImg = new Image(100, 100);
-branchImg.src = '/assets/branch2.png';
-canvas.appendChild(branchImg);
-
-
-let TO_RADIANS = Math.PI/180;
-let degrees = 10;
+//Goat creation, branch hit detection, and update to generate new goat function
+window.addEventListener('keydown', moveGoat, false);
 
 function Goat (x, y, dx, dy, height, width) {
+  let TO_RADIANS = Math.PI/180;
+  let degrees = 10;
+
   this.x = x;
   this.y = y;
   this.dx = dx;
@@ -236,7 +218,6 @@ function Goat (x, y, dx, dy, height, width) {
       if(hit.length > 0){
         this.y = hit[0].y - goatWidth;
           staticGoatsArr.push(this);
-          // console.log('our static goats', staticGoatsArr.length);
           generateGoatStartingCoords();
           if (staticGoatsArr.length % 5 === 0) {
             if(this.dy === newdy) {
@@ -256,21 +237,18 @@ function Goat (x, y, dx, dy, height, width) {
       }
 
       if(this.y - this.height > canvas.height){
-        splode = new Splode(this.x, 0, 100, 100);
-        splodeCounter = 0;
-        displaySplode = true;
+        if (liveCounter <= 3){
+          splode = new Splode(this.x, 0, 100, 100);
+          splodeCounter = 0;
+          displaySplode = true;
+      
+          audio.play();
 
-        generateGoatStartingCoords();
-
-        goat = new Goat (startingX, startingY, 0, newdy, 100, 100);
-        goat.x = startingX;
-        goat.y = startingY;
-        audio.play();
-        if (liveCounter < 3){
           liveCounter ++;
           liveArr[liveCounter-1].src = deadGoat;
         }
         if (liveCounter === 3) {
+          displaySplode = false;
           gameOver = true;
           newGame = true;
           staticGoatsArr = [];
@@ -279,18 +257,30 @@ function Goat (x, y, dx, dy, height, width) {
           live1.src = aliveGoat;
           live2.src = aliveGoat;
           live3.src = aliveGoat;
-          stopAnimation();
+          if(!displaySplode) {
+            stopAnimation();
+          }
         }
+
+        // splode = new Splode(this.x, 0, 100, 100);
+        // splodeCounter = 0;
+        // displaySplode = true;
+
+        generateGoatStartingCoords();
+        goat = new Goat (startingX, startingY, 0, newdy, 100, 100);
+        goat.x = startingX;
+        goat.y = startingY;
       }
     } else {
       this.x += this.dxgravity;
       this.y += this.dygravity;
     }
     this.draw();
-    console.timeEnd("Start of Update");
   }
 }
 
+
+//Registering movement of falling goat
 function moveGoat(e){
   switch(e.keyCode){
     case 39:
@@ -329,15 +319,38 @@ function turnGravityOff(){
       live1.src = aliveGoat;
       live2.src = aliveGoat;
       live3.src = aliveGoat;
+      splodeCounter = 0;
+      displaySplode = false;
       stopAnimation();
     }, 6000);
   }
 }
 
+//Start game function called when start game button is pressed
+let startButton = document.getElementById('startButton');
+startButton.addEventListener('click', startGame)
+
+function startGame() {
+  gameOver = false;
+  liveCounter = 0;
+  points = 0;
+  pointDiv.innerHTML = points;
+  for (var i = 0; i < liveArr.length; i++) {
+    liveArr[i].src = aliveGoat;
+  }
+
+  bigRedButton.classList.add('bigRedButton');
+  setTimeout(function(){
+      animate();
+    }, 2500);
+  document.getElementById('startDiv').style.display = 'none';
+  document.getElementById('header').classList.remove('startHeader');
+}
+
+//requestId is declared as an empty global var so that animate() and stopAnimation() has access to this
 var requestId = "";
 
 function stopAnimation(e) {
-  console.log("request ID", requestId);
   cancelAnimationFrame(requestId);
   document.getElementById('header').classList.add('startHeader');
   bigRedButton.classList.remove('bigRedButton');
@@ -353,8 +366,8 @@ function stopAnimation(e) {
   document.getElementById('points').innerHTML = 0;
 }
 
+//Animate function that gets called when start button is pressed
 function animate(){
-  // requestAnimationFrame(animate);
   requestId = requestAnimationFrame(animate);
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -382,9 +395,8 @@ function animate(){
   }
 }
 
+//Initial goat generated
 generateGoatStartingCoords();
 goat = new Goat (startingX, startingY, 0, 4, goatWidth, goatWidth);
-console.log('static goats', staticGoatsArr.length);
-// animate();
 
 
