@@ -232,6 +232,12 @@ h1 span {
   font-size: 20px;
   transition: top 2s, left 2s, font-size 2s;
 }
+.startText {
+  color: white;
+  font-family: 'Hind', sans-serif;
+  font-size: 22px;
+  height: 50px;
+}
 
 /* ***** START SCREEN ***** */
 .startTextContainer {
@@ -294,6 +300,7 @@ h1 span {
 }
 
 .wideScore {
+  font-family: 'Notable', sans-serif;
   width: 120px;
   font-family: "Notable", sans-serif;
 }
