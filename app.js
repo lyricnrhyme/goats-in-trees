@@ -44,9 +44,10 @@ let goatsBleating = new Audio('/assets/goatsbleating.mp3');
 let branches = [
   {x1: 650, x2: 775, y: 150},
   {x1: 790, x2: 925, y: 250},
-  {x1: 475, x2: 600, y: 375},
-  {x1: 675, x2: 800, y: 425},
-  {x1: 750, x2: 890, y: 525},
+  {x1: 485, x2: 610, y: 375},
+  {x1: 575, x2: 700, y: 525},
+  {x1: 750, x2: 890, y: 425},
+  {x1: 850, x2: 985, y: 575},
 ]
 
 let goats = ['url("/assets/goats/cute-goat.png")', 'url("/assets/goats/cute-goat-1.png")', 'url("/assets/goats/cute-goat-2.png")', 'url("/assets/goats/cute-goat-3.png")',  'url("/assets/goats/cute-goat-4.png")',  'url("/assets/goats/cute-goat-5.png")', 'url("/assets/goats/cute-goat-6.png")', 'url("/assets/goats/cute-goat-7.png")', 'url("/assets/goats/cute-goat-8.png")']
@@ -54,11 +55,13 @@ let goats = ['url("/assets/goats/cute-goat.png")', 'url("/assets/goats/cute-goat
 let leftArrow = document.getElementById('leftSelect');
 let rightArrow = document.getElementById('rightSelect');
 let goatSelects = document.getElementsByClassName('goatImg');
+
 for (let i=0; i<goatSelects.length; i++) {
   goatSelects[i].style.backgroundImage = goats[i];
   goatSelects[i].style.backgroundSize = 'contain';
   goatSelects[i].addEventListener('click', selectThisGoat);
 }
+
 leftArrow.addEventListener('click', selectLeft);
 rightArrow.addEventListener('click', selectRight);
 
@@ -68,7 +71,7 @@ function selectLeft() {
   } else {
     for (let i=0; i<goatSelects.length; i++){
       goatSelects[i].style.backgroundImage = goats[goats.indexOf(goatSelects[i].style.backgroundImage) - 1];
-      if (goatSelects[i].style.border === '1px solid skyblue') {
+      if (goatSelects[i].style.border === '3px solid white') {
         goatSelects[i].style.border = 'none';
       }
     }
@@ -81,7 +84,7 @@ function selectRight() {
   } else {
     for (let i=0; i<goatSelects.length; i++){
       goatSelects[i].style.backgroundImage = goats[goats.indexOf(goatSelects[i].style.backgroundImage) + 1];
-      if (goatSelects[i].style.border === '1px solid skyblue') {
+      if (goatSelects[i].style.border === '3px solid white') {
         goatSelects[i].style.border = 'none';
       }
     }
@@ -94,11 +97,11 @@ canvas.appendChild(goatImg);
 
 function selectThisGoat() {
   for (let i=0; i<goatSelects.length; i++) {
-    if (goatSelects[i].style.border === '3px solid rgb(72, 188, 224)') {
+    if (goatSelects[i].style.border === '3px solid white') {
       goatSelects[i].style.border = 'none';
     }
   }
-  this.style.border = '3px solid rgb(72, 188, 224)'
+  this.style.border = '3px solid white'
   let chosenGoat = this.style.backgroundImage.split('');
   chosenGoat.pop();
   chosenGoat.pop();
@@ -155,7 +158,7 @@ let startingX;
 let startingY = -50;
 
 function generateGoatStartingCoords(min, max){
-  startingX = randomIntFromRange(175 + goatWidth, canvas.width - goatWidth - 175);
+  startingX = randomIntFromRange(175 + goatWidth, canvas.width - goatWidth - 225);
   console.log('starting X', startingX);
 }
 
@@ -177,7 +180,7 @@ function Splode (x){
   this.width = 150;
 
   this.draw = function(){
-    if (splodeCounter < 35) {
+    if (splodeCounter < 45) {
       ctx.globalAlpha = this.alpha;
       ctx.drawImage(splodeImg, this.x - 45, (canvas.height - 70), 150, 150);
     } else {
@@ -229,7 +232,7 @@ function Goat (x, y, dx, dy, height, width) {
   this.update = function(){
     let newdy = this.dy;
 
-    let hit = branches.filter(goat => this.x < (goat.x2) && this.x > (goat.x1) && this.y >  (goat.y-goatWidth) && this.y < (goat.y+16))
+    let hit = branches.filter(goat => (this.x + goatWidth/4) < (goat.x2) && (this.x + goatWidth/2) > (goat.x1) && this.y >  (goat.y-goatWidth) && this.y < (goat.y+16))
     if(gravity == true){
       if(hit.length > 0){
         this.y = hit[0].y - goatWidth;
@@ -267,24 +270,17 @@ function Goat (x, y, dx, dy, height, width) {
         if (liveCounter < 3){
           liveCounter ++;
           liveArr[liveCounter-1].src = deadGoat;
-          if (liveCounter === 3) {
-            gameOver = true;
-            newGame = true;
-            staticGoatsArr = [];
-            liveCounter = 0;
-            goat = new Goat (startingX, startingY, 0, 4, 100, 100);
-            live1.src = aliveGoat;
-            live2.src = aliveGoat;
-            live3.src = aliveGoat;
-            stopAnimation();
-            document.getElementById('startDiv').style.display = 'flex';
-            if (points > highScore) {
-              highScore = points;
-              document.getElementById('highScore').innerHTML = highScore;
-            }
-            points = 0;
-            document.getElementById('points').innerHTML = 0;
-          }
+        }
+        if (liveCounter === 3) {
+          gameOver = true;
+          newGame = true;
+          staticGoatsArr = [];
+          liveCounter = 0;
+          goat = new Goat (startingX, startingY, 0, 4, 100, 100);
+          live1.src = aliveGoat;
+          live2.src = aliveGoat;
+          live3.src = aliveGoat;
+          stopAnimation();
         }
       }
     } else {
@@ -324,7 +320,17 @@ function turnGravityOff(){
     goatsBleating.play();
 
     setTimeout(function(){
+      gravity = true;
       goatsBleating.pause();
+      gameOver = true;
+      newGame = true;
+      staticGoatsArr = [];
+      liveCounter = 0;
+      goat = new Goat (startingX, startingY, 0, 4, 100, 100);
+      live1.src = aliveGoat;
+      live2.src = aliveGoat;
+      live3.src = aliveGoat;
+      stopAnimation();
     }, 6000);
   }
 }
@@ -332,11 +338,21 @@ function turnGravityOff(){
 var requestId = "";
 
 function stopAnimation(e) {
+  console.log("request ID", requestId);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   cancelAnimationFrame(requestId);
   document.getElementById('header').classList.add('startHeader');
   bigRedButton.classList.remove('bigRedButton');
+  bigRedButton.classList.remove('disabledButton');
   previousScoreSpan.innerHTML = points;
   previousScoreContainer.classList.remove('scoreSummaryHidden');
+  document.getElementById('startDiv').style.display = 'flex';
+  if (points > highScore) {
+    highScore = points;
+    document.getElementById('highScore').innerHTML = highScore;
+  }
+  points = 0;
+  document.getElementById('points').innerHTML = 0;
 }
 
 function animate(){
