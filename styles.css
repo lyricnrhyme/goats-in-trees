@@ -325,7 +325,7 @@ h1 span {
   align-items: center;
   justify-content: space-around;
   position: absolute;
-  bottom: 27%;
+  bottom: 20%;
   left: 38%;
 }
 
@@ -350,7 +350,7 @@ h1 span {
 #startButton {
   z-index: 2;
   position: absolute;
-  bottom: 13%;
+  bottom: 8%;
   left: 30.5%;
   height: 65px;
   width: 40%;
